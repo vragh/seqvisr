@@ -216,12 +216,6 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
   outcol <- NULL
   roicol <- NULL
 
-  #Data for testing
-  #mymsa <- "/home/owner/Nextcloud/laptop_rplace/google.fasta"
-  #  myref <- "KY485192.1"
-  #mymsa <- "/home/owner/Nextcloud/laptop_rplace/testaln_mrna.fasta"
-  #  myref <- "Ref0"
-
 
   #Basic checks
   if(is.null(mymsa)) { stop("Please supply the name of a MSA file! (Must be fasta formatted!)") }
@@ -310,8 +304,6 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
 
   #To visualize SNPs and gaps, some one sequence needs to be set as the reference
   #This is passed to the function
-  #  myref <- "Ref0"
-  #  myref <- ">LT734359.1/2709-2956 Human ORFeome Gateway entry vector pENTR223-CLOCK, complete sequence"
   #First taking this reference sequence out separately and replicate()'ing it vector
   #of length (num_sequences) * (num_chars_in_seq); the idea is to cbind() this to the entire data.frame
   #and then mark each character as a perfect match (*), gap (-), or SNP (+) by simply comparing
@@ -354,12 +346,6 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
   #If such are specified, they also need to be indicated in fasdf, and additonal legend
   #items and such must be set up, which is what is being done in the if block below along with the
   #concomitant plotting.
-
-  #Values for testing (must have the appropriate MSA loaded)
-  #
-  #myroi <- list(c("VM_4359", 100, "Hydrophobic"), c("VM_4359", 200:210), c("Novel_4124", 220), 180)
-  #myroi <- list(c("Seq2", 100, "Hydrophobic"), c("Seq3", 200:210), c("Seq4", 220), 180, c(50:60, "Helix"))
-
 
   #Checking if regions of interest have been supplied and plot accordingly
 
