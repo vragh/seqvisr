@@ -419,7 +419,7 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
       }
 
     }
-    rm(roidesc, roipos, roiseq, lind, i, hasroiname, hasroidesc, curset)
+    #rm(roidesc, roipos, roiseq, lind, i, hasroiname, hasroidesc, curset)
 
     #For all remaining roicol positions that are just NA, fill them with their equivalent
     #outcol values
