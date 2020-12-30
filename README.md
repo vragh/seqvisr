@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/vragh/seqvisr.svg?branch=main)](https://travis-ci.com/vragh/seqvisr)
 
 # seqvisr
-Biological sequence visualization functions in R
+Biological sequence visualization functions in `R`.
 
 Currently consists of a single function--`msavisr`--that can be used to visualize multiple sequence alignments in R using `ggplot2`. More functions (and functionality) to be added in the future.
 
