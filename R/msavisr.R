@@ -35,8 +35,9 @@
 #' or more (and combinations) of single integer pos values and integer range pos values (e.g., something
 #' like c("Seq1", 1:10, 100, "Helix")). Thus, for example, if a SNP at position 100 in "seq2" and a the
 #' region of nucleotides/amino-acids 20:30 representing a domain in all sequences were to be ROIs, they
-#' would be supplied like so list(c("seq2", 100, "SNP"), c(20:30, "domain")). Every ROI is highlighted
-#' with a separate color (from a color blind friendly palette; the colors are chosen automatically).
+#' would be supplied like so list(c("seq2", 100, "SNP"), c(20:30, "domain")). ROIs can be assigned any
+#' color by the user (see argument roicolors); colors are assigned automatically otherwise (optionally
+#' from a color blind-friendly palette; see argument cbfcols).
 #'
 #' @param hnon (double, optional) the height of the feature "bar(s)" for all mismatches and gaps in the MSA. (Default: 0.4.)
 #'
@@ -56,13 +57,17 @@
 #'
 #' @param aroi (double, optional) the transparency of the feature "bar(s)" for all ROIs in the MSA. (Default: 1.0.)
 #'
-#' @param basecolors (vector of 3 character strings, optional) although the colors for the ROIs are chosen automatically
-#' the colors for the matches, mismatches, and gaps can optionally be supplied by the user via this argument. Defaults are
-#' c("gray", "black", "white") when no colors are supplied and cbfcols (see below) is set to FALSE.
+#' @param basecolors (vector of 3 character strings, optional) the colors for the matches, mismatches, and gaps can optionally be
+#' supplied by the user via this argument. Defaults are c("gray", "black", "white") when no colors are supplied and cbfcols (see
+#' below) is set to FALSE. If cbfcols == TRUE, and no colors are supplied by the user then a palette from viridis is chosen.
 #'
-#' @param cbfcols (boolean, optional) allows for the user to choose whether the coloring scheme used should also be color
-#' blind friendly for the matches, mismatches, and gaps (like the colors for the ROIs, if any) in the event the user is not
-#' supplying their own colors. (Default: FALSE.)
+#' @param roicolors (vector of n character strings, optional) user-specified colors for the ROI features can be supplied via this
+#' argument. As many colors as there are ROIs need to be supplied, and the order of the colors should correspond to the order of the
+#' ROIs in the input list. If too few colors are supplied, colors are reused; if too many are supplied, the last few colors will not
+#' be used. Defaults are chosen automacially from grDevices::color() if cbfcols == FALSE, and from viridis otherwise.
+#'
+#' @param cbfcols (boolean, optional) allows for the user to choose whether the automatic coloring scheme used should be color-blind
+#' friendly. (Default: TRUE; set to FALSE to use non-color blind-friendly colors.)
 #'
 #' @details
 #' msavisr plots the matches as a separate geom_tile() layer, the gaps + mismatches as a geom_tile() layer, and the ROIs as a
@@ -102,6 +107,8 @@
 #' msavisr(mymsa = testmsa, myref = "Ref0", myroi = testroi)
 #' }
 #'
+#' @importFrom grDevices colors
+#'
 #' @importFrom utils read.table
 #'
 #' @importFrom viridis viridis
@@ -117,100 +124,10 @@
 #' @export
 
 msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, myroi = NULL,
-                       hnon = NULL, hmat = NULL, hroi = NULL,
-                       wnon = NULL, wmat = NULL, wroi = NULL,
-                       anon = NULL, amat = NULL, aroi = NULL,
-                       basecolors = NULL, cbfcols = FALSE){
+                    hnon = NULL, hmat = NULL, hroi = NULL, wnon = NULL, wmat = NULL, wroi = NULL,
+                    anon = NULL, amat = NULL, aroi = NULL, basecolors = NULL, roicolors = NULL,
+                    cbfcols = TRUE){
 
-  ##############################################################################################################
-
-  #General description:
-
-  #msavis is an R function to visualize multiple sequence alignments within R.
-  #The MSA should be supplied as a fasta file.
-  #It is absolutely required that all sequences in the MSA are of the same length!!
-
-  #The function has two mandatory arguments: the name of the MSA file (mymsa, character string),
-  #and the name of one of the sequences to be used as the reference against which gaps and mismatches
-  #will be calculated (myref, character string).
-  #A path (mypath, character string) can also be supplied if necessary.
-
-  #The function accepts both nucleotide and amino acid MSAs (it is actually alphabet agnostic).
-  #It produces a ggplot2-based plot (using geom_tile()) of the MSA with matches, mismatches, and gaps highlighted using
-  #different colors.
-  #By default, the reference sequene is located at the "top" of the MSA visualization.
-  #The default coloring scheme is a color blind-friendly combination, but this can be
-  #overridden by supplying a three string vector containing the colors for matches, mismatches, and gaps
-  #respectively.
-
-  #The function also offers the ability to adjust the widths and heights of the geom_tiles() representing
-  #the matches and non-matches (i.e., gaps + mismatches). As the matches and non-matches are plotted as
-  #separate layers, adjusting the widths and heights allows for some level of control over highlighting the features
-  #in the MSA.
-
-  #Additionally, the use can elect to supply the function with a list of vectors (list(c(), c(), ...))
-  #indicating specific regions of interest (ROIs) in the MSA. These ROIs can be either a position in the MSA,
-  #or a position in a specific sequence. ROIs are passed as a separate layer with its own height and width parameters
-  #permitting this layer to be used for purposes such as highlighting SNPs that might otherwise not be visible in the MSA.
-
-
-  #Description of the function arguments
-
-  #mymsa (character string, mandatory) the name of the fasta-formatted file containing the multiple sequence alignment (MSA).
-
-  #myref (character string, mandatory) the fasta header (not including the ">") of one of the sequences in the MSA which
-  #act as the reference sequence.
-
-  #mypath (character string, optional) the path to the directory containing the MSA.
-
-  #refontop (boolean, optional) should the reference sequence be placed at the top of the MSA plot (default)
-  #or at the bottom? (Set to FALSE for bottom.)
-
-  #myroi (list of vectors, optional) the user can manually specify regions of interest (ROI; i.e., positions in the MSA)
-  #that they wish to highlight manually via myroi. This must be supplied as a list of vectors wherein each vector
-  #is of the format c(seqname, pos, desc), or c(seqname, pos), or c(pos, desc), or c(pos).
-  #The seqname (name of a specific sequence in the MSA) and the desc (description of the feature)
-  #are optional. pos (i.e., the positions that denote the ROI) can be a single integer (e.g., 100),
-  #or a range of integers (1:10). Each such ROI vector can also hold one or more (and combinations) of
-  #single integer pos values and integer range pos values (e.g., something like c("Seq1", 1:10, 100, "Helix")).
-  #Thus, for example, if a SNP at position 100 in "seq2" and a the region of nucleotides/amino-acids 20:30 representing a domain
-  #in all sequences were to be ROIs, they would be supplied like so list(c("seq2", 100, "SNP"), c(20:30, "domain")).
-  #Every ROI is highlighted with a separate color (from a color blind friendly palette).
-
-  #hnon (double, optional) the height of the feature "bar(s)" for all mismatches and gaps in the MSA.
-  #hmat (double, optional) the height of the feature "bar(s)" for all matches in the MSA.
-  #hroi (double, optional) the height of the feature "bar(s)" for all ROIs in the MSA.
-
-  #wnon (double, optional) the width of the feature "bar(s)" for all mismatches and gaps in the MSA.
-  #wmat (double, optional) the width of the feature "bar(s)" for all matches in the MSA.
-  #wroi (double, optional) the width of the feature "bar(s)" for all ROIs in the MSA.
-
-  #anon (double, optional) the transparency of the feature "bar(s)" for all mismatches and gaps in the MSA.
-  #amat (double, optional) the transparency of the feature "bar(s)" for all matches in the MSA.
-  #aroi (double, optional) the transparency of the feature "bar(s)" for all ROIs in the MSA.
-
-  #basecolors (vector of 3 character strings, optional) although the colors for the ROIs are chosen automatically
-  #the colors for the matches, mismatches, and gaps can optionally be supplied by the user via this argument.
-  #Defaults are c("gray", "black", "white") when no colors are supplied and cbfcols (see below) is set to FALSE.
-
-  #cbfcols (boolean, optional) allows for the user to choose whether the coloring scheme used should also be color
-  #blind friendly for the matches, mismatches, and gaps (like the colors for the ROIs, if any) in the event the user
-  #is not supplying their own colors. (Default: FALSE.)
-
-  #Depends: viridis (>= 0.5.1), magrittr (>= 2.0.1), stringr (>= 1.4.0), dplyr (>= 1.0.2), tidyr (>= 1.1.2), ggplot2 (>= 3.3.2)
-
-
-
-  ##############################################################################################################
-
-
-  #require(RColorBrewer)
-  #require(viridis)
-  #require(magrittr)
-  #require(stringr)
-  #require(dplyr)
-  #require(tidyr)
-  #require(ggplot2)
 
   #To avoid R-build error notes "no visible binding for global variable" and "Undefined global functions or variables:"
   outcol <- NULL
@@ -220,6 +137,7 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
   #Basic checks
   if(is.null(mymsa)) { stop("Please supply the name of a MSA file! (Must be fasta formatted!)") }
   if(is.null(myref)) { stop("Please indicate which sequence you would like to use as the reference!") }
+
 
   #Setting up the path to the object
   if(is.null(mypath)){
@@ -433,32 +351,71 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
     baselvls <- c("Match", "Mismatch", "Gap")
     roilvls <- unique(fasdf$roicol)[!(unique(fasdf$roicol) %in% baselvls)]
     roilvls <- roilvls[order(roilvls)]
-    baselvls <- c(baselvls, roilvls)
 
-    fasdf$roicol <- factor(fasdf$roicol, levels = baselvls)
+
+    fasdf$roicol <- factor(fasdf$roicol, levels = c(baselvls, roilvls))
 
     #fasdf$outcol <- factor(fasdf$outcol, levels = c("Match", "Mismatch", "Gap"))
 
     #Setting up the colors for plotting
     #The color palette consists of colors for the basic match, mismatch, gap trio
     #plus whatever are the n categories of ROIs
-    #The colors for the ROIs are selected from viridis by passing the length of roilvls
-    #from above to it
-    #The basecolors may be optionally supplied by the user; if the user sets cbf to TRUE,
-    #then the basecolors are also chosen from viridis()
-    #basecolors <- NULL
-    #basecolors <- c("red", "green", "yellow")
-    #cbfcols <- FALSE
+    #Setting up the colors for plotting
+    #The color palette consists of colors for the basic match, mismatch, gap trio
+    #plus whatever are the n categories of ROIs
     cbPalette <- c()
 
-    if(isTRUE(cbfcols) & is.null(basecolors)){
-      cbPalette <- viridis::viridis(length(baselvls))
-    } else if(is.null(basecolors) & length(cbPalette) != length(baselvls)){
-      basecolors <- c("gray", "black", "white")
-      cbPalette <- c(basecolors, viridis::viridis(length(roilvls)))
-    } else if(!is.null(basecolors)){
-      cbPalette <- c(basecolors, viridis::viridis(length(roilvls)))
+    #There are two color sets to choose: basecolors and roicolors
+
+    #Basecolors
+    if(!is.null(basecolors)){ #User-supplied basecolors
+
+      #Check if enough colors has been supplied, else reuse some colors
+      if(length(basecolors) < length(baselvls)){
+        warning("Not enough basecolors supplied, reusing some colors!!")
+        basecolors <- c(basecolors, rep_len(basecolors, abs(length(baselvls)-length(basecolors))))
+      }
+      if(length(basecolors) > length(baselvls)){
+        warning("Too many basecolors supplied, will be leaving out the last few!!")
+        basecolors <- basecolors[1:length(baselvls)]
+      }
+
+    } else{#No user-supplied basecolors
+
+      #Check if cbfcols is set and assign appropriately
+      if(isTRUE(cbfcols)){
+        basecolors <- viridis::viridis(length(baselvls))
+      } else{
+        basecolors <- c("gray", "black", "white")
+      }
+
     }
+
+    #roicolors
+    if(!is.null(roicolors)){ #User-supplied roicolors
+
+      #Check if enough colors has been supplied, else reuse some colors
+      if(length(roicolors) < length(roilvls)){
+        warning("Not enough roicolors supplied, reusing some colors!!")
+        roicolors <- c(roicolors, rep_len(roicolors, length(roilvls)-length(roicolors)) )
+      }
+      if(length(roicolors) > length(roilvls)){
+        warning("Too many roicolors supplied, will be leaving out the last few!!")
+        roicolors <- roicolors[1:length(roilvls)]
+      }
+
+    } else{
+
+      #Check if cbfcols is set and assign appropriately
+      if(isTRUE(cbfcols)){
+        roicolors <- viridis::viridis(length(roilvls))
+      } else{
+        roicolors <- grDevices::colors(distinct = TRUE)[1:length(roilvls)]
+      }
+
+    }
+
+    cbPalette <- c(basecolors, roicolors)
 
 
 
@@ -529,19 +486,31 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
     baselvls <- c("Match", "Mismatch", "Gap")
     fasdf$outcol <- factor(fasdf$outcol, levels = baselvls)
 
-    #Setting up the colors
-    #basecolors <- NULL
-    #basecolors <- c("red", "green", "yellow")
-    #cbfcols <- FALSE
+    #Setting up the colors - basecolors only here
     cbPalette <- c()
 
-    if(isTRUE(cbfcols) & is.null(basecolors)){
-      cbPalette <- viridis::viridis(length(baselvls))
-    } else if(is.null(basecolors) & length(cbPalette) != length(baselvls)){
-      basecolors <- c("gray", "black", "white")
-      cbPalette <- basecolors
-    } else if(!is.null(basecolors)){
-      cbPalette <- basecolors
+    #Basecolors
+    if(!is.null(basecolors)){ #User-supplied basecolors
+
+      #Check if enough colors has been supplied, else reuse some colors
+      if(length(basecolors) < length(baselvls)){
+        warning("Not enough basecolors supplied, reusing some colors!!")
+        basecolors <- c(basecolors, rep_len(basecolors, abs(length(baselvls)-length(basecolors))))
+      }
+      if(length(basecolors) > length(baselvls)){
+        warning("Too many basecolors supplied, will be leaving out the last few!!")
+        basecolors <- basecolors[1:length(baselvls)]
+      }
+
+    } else{#No user-supplied basecolors
+
+      #Check if cbfcols is set and assign appropriately
+      if(isTRUE(cbfcols)){
+        basecolors <- viridis::viridis(length(baselvls))
+      } else{
+        basecolors <- c("gray", "black", "white")
+      }
+
     }
 
     #Not ROIs so only two layers: matches and non-matches as layers for ggplot()
