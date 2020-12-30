@@ -8,10 +8,10 @@
 #'
 #'
 #' @usage msavisr(mymsa = NULL, myref = NULL, mypath = NULL,
-#' refontop = TRUE, myroi = NULL, hnon = NULL,
-#' hmat = NULL, hroi = NULL, wnon = NULL, wmat = NULL,
-#' wroi = NULL, anon = NULL, amat = NULL,
-#' aroi = NULL, basecolors = NULL, cbfcols = FALSE)
+#' refontop = TRUE, myroi = NULL, hnon = NULL, hmat = NULL,
+#' hroi = NULL, wnon = NULL, wmat = NULL, wroi = NULL,
+#' anon = NULL, amat = NULL, aroi = NULL, basecolors = NULL,
+#' roicolors = NULL, cbfcols = TRUE)
 #'
 #' @param mymsa (character string, mandatory) the name of the fasta-formatted file containing the
 #' multiple sequence alignment (MSA). The full path to the file can also be provided here (in which

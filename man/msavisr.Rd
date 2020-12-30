@@ -5,10 +5,10 @@
 \title{Multiple sequence alignment (MSA) visualization and manipulation thereof.}
 \usage{
 msavisr(mymsa = NULL, myref = NULL, mypath = NULL,
-refontop = TRUE, myroi = NULL, hnon = NULL,
-hmat = NULL, hroi = NULL, wnon = NULL, wmat = NULL,
-wroi = NULL, anon = NULL, amat = NULL,
-aroi = NULL, basecolors = NULL, cbfcols = FALSE)
+refontop = TRUE, myroi = NULL, hnon = NULL, hmat = NULL,
+hroi = NULL, wnon = NULL, wmat = NULL, wroi = NULL,
+anon = NULL, amat = NULL, aroi = NULL, basecolors = NULL,
+roicolors = NULL, cbfcols = TRUE)
 }
 \arguments{
 \item{mymsa}{(character string, mandatory) the name of the fasta-formatted file containing the
@@ -33,8 +33,9 @@ single integer (e.g., 100), or a range of integers (1:10). Each such ROI vector 
 or more (and combinations) of single integer pos values and integer range pos values (e.g., something
 like c("Seq1", 1:10, 100, "Helix")). Thus, for example, if a SNP at position 100 in "seq2" and a the
 region of nucleotides/amino-acids 20:30 representing a domain in all sequences were to be ROIs, they
-would be supplied like so list(c("seq2", 100, "SNP"), c(20:30, "domain")). Every ROI is highlighted
-with a separate color (from a color blind friendly palette; the colors are chosen automatically).}
+would be supplied like so list(c("seq2", 100, "SNP"), c(20:30, "domain")). ROIs can be assigned any
+color by the user (see argument roicolors); colors are assigned automatically otherwise (optionally
+from a color blind-friendly palette; see argument cbfcols).}
 
 \item{hnon}{(double, optional) the height of the feature "bar(s)" for all mismatches and gaps in the MSA. (Default: 0.4.)}
 
@@ -54,13 +55,17 @@ with a separate color (from a color blind friendly palette; the colors are chose
 
 \item{aroi}{(double, optional) the transparency of the feature "bar(s)" for all ROIs in the MSA. (Default: 1.0.)}
 
-\item{basecolors}{(vector of 3 character strings, optional) although the colors for the ROIs are chosen automatically
-the colors for the matches, mismatches, and gaps can optionally be supplied by the user via this argument. Defaults are
-c("gray", "black", "white") when no colors are supplied and cbfcols (see below) is set to FALSE.}
+\item{basecolors}{(vector of 3 character strings, optional) the colors for the matches, mismatches, and gaps can optionally be
+supplied by the user via this argument. Defaults are c("gray", "black", "white") when no colors are supplied and cbfcols (see
+below) is set to FALSE. If cbfcols == TRUE, and no colors are supplied by the user then a palette from viridis is chosen.}
 
-\item{cbfcols}{(boolean, optional) allows for the user to choose whether the coloring scheme used should also be color
-blind friendly for the matches, mismatches, and gaps (like the colors for the ROIs, if any) in the event the user is not
-supplying their own colors. (Default: FALSE.)}
+\item{roicolors}{(vector of n character strings, optional) user-specified colors for the ROI features can be supplied via this
+argument. As many colors as there are ROIs need to be supplied, and the order of the colors should correspond to the order of the
+ROIs in the input list. If too few colors are supplied, colors are reused; if too many are supplied, the last few colors will not
+be used. Defaults are chosen automacially from grDevices::color() if cbfcols == FALSE, and from viridis otherwise.}
+
+\item{cbfcols}{(boolean, optional) allows for the user to choose whether the automatic coloring scheme used should be color-blind
+friendly. (Default: TRUE; set to FALSE to use non-color blind-friendly colors.)}
 }
 \value{
 A ggplot2 object is returned to the parent environment for plotting and/or further downstream processing/manipulation.
