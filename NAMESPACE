@@ -3,6 +3,7 @@
 export(msavisr)
 import(dplyr)
 import(ggplot2)
+importFrom(grDevices,colors)
 importFrom(magrittr,"%<>%")
 importFrom(magrittr,"%>%")
 importFrom(stringr,str_detect)
