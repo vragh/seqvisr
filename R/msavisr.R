@@ -7,9 +7,11 @@
 #'below).
 #'
 #'
-#' @usage msavisr(mymsa = "name_of_msa_file.fasta", myref = "fasta_header_of_reference_sequence",
-#' refontop = TRUE, myroi = NULL, hnon = NULL, hmat = NULL, hroi = NULL, wnon = NULL, wmat = NULL,
-#' wroi = NULL, #' anon = NULL, amat = NULL, aroi = NULL, basecolors = NULL, cbfcols = FALSE)
+#' @usage msavisr(mymsa = NULL, myref = NULL, mypath = NULL,
+#' refontop = TRUE, myroi = NULL, hnon = NULL,
+#' hmat = NULL, hroi = NULL, wnon = NULL, wmat = NULL,
+#' wroi = NULL, anon = NULL, amat = NULL,
+#' aroi = NULL, basecolors = NULL, cbfcols = FALSE)
 #'
 #' @param mymsa (character string, mandatory) the name of the fasta-formatted file containing the
 #' multiple sequence alignment (MSA). The full path to the file can also be provided here (in which
@@ -93,7 +95,8 @@
 #' msavisr(mymsa = testmsa, myref = "Ref0") #No ROIs
 #'
 #' #Defining an example ROI
-#' testroi <- list(c("Ref0", 100:110, "Ref0 Domain1"), c(14, "Pseudouridine"), c(20:30, "Domain2"), c("Seq2", 55, "SNP"))
+#' testroi <- list(c("Ref0", 100:110, "Ref0 Domain1"), c(14, "Pseudouridine"),
+#' c(20:30, "Domain2"), c("Seq2", 55, "SNP"))
 #'
 #' #MSA with ROIs
 #' msavisr(mymsa = testmsa, myref = "Ref0", myroi = testroi)
@@ -194,6 +197,8 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
   #blind friendly for the matches, mismatches, and gaps (like the colors for the ROIs, if any) in the event the user
   #is not supplying their own colors. (Default: FALSE.)
 
+  #Depends: viridis (>= 0.5.1), magrittr (>= 2.0.1), stringr (>= 1.4.0), dplyr (>= 1.0.2), tidyr (>= 1.1.2), ggplot2 (>= 3.3.2)
+
 
 
   ##############################################################################################################
@@ -206,6 +211,10 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
   #require(dplyr)
   #require(tidyr)
   #require(ggplot2)
+
+  #To avoid R-build error notes "no visible binding for global variable" and "Undefined global functions or variables:"
+  outcol <- NULL
+  roicol <- NULL
 
   #Data for testing
   #mymsa <- "/home/owner/Nextcloud/laptop_rplace/google.fasta"
@@ -313,6 +322,8 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
 
   fasdf <- cbind(fasdf, refcol)
   rm(myrefseq, refcol)
+
+  #fasdf$outcol <- NA
 
   for(i in 1:nrow(fasdf)){
 

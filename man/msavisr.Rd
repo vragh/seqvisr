@@ -4,9 +4,11 @@
 \alias{msavisr}
 \title{Multiple sequence alignment (MSA) visualization and manipulation thereof.}
 \usage{
-msavisr(mymsa = "name_of_msa_file.fasta", myref = "fasta_header_of_reference_sequence",
-refontop = TRUE, myroi = NULL, hnon = NULL, hmat = NULL, hroi = NULL, wnon = NULL, wmat = NULL,
-wroi = NULL, #' anon = NULL, amat = NULL, aroi = NULL, basecolors = NULL, cbfcols = FALSE)
+msavisr(mymsa = NULL, myref = NULL, mypath = NULL,
+refontop = TRUE, myroi = NULL, hnon = NULL,
+hmat = NULL, hroi = NULL, wnon = NULL, wmat = NULL,
+wroi = NULL, anon = NULL, amat = NULL,
+aroi = NULL, basecolors = NULL, cbfcols = FALSE)
 }
 \arguments{
 \item{mymsa}{(character string, mandatory) the name of the fasta-formatted file containing the
@@ -99,7 +101,8 @@ testmsa <- system.file("extdata", "testaln_mrna.fasta", package = "seqvisr", mus
 msavisr(mymsa = testmsa, myref = "Ref0") #No ROIs
 
 #Defining an example ROI
-testroi <- list(c("Ref0", 100:110, "Ref0 Domain1"), c(14, "Pseudouridine"), c(20:30, "Domain2"), c("Seq2", 55, "SNP"))
+testroi <- list(c("Ref0", 100:110, "Ref0 Domain1"), c(14, "Pseudouridine"),
+c(20:30, "Domain2"), c("Seq2", 55, "SNP"))
 
 #MSA with ROIs
 msavisr(mymsa = testmsa, myref = "Ref0", myroi = testroi)

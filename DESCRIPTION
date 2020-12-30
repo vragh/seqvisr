@@ -7,10 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "vraghvragh@mailfence.com")
 Description: seqvisr enables visualization of biological sequences (and manipulation thereof) in R. It currently comprises of a single function msavisr that can be used to visualize multiple sequence alignments. Additional functions (and functionality) to be added in the future.
-Depends: viridis (>= 0.5.1), magrittr (>= 2.0.1), stringr (>= 1.4.0), dplyr (>= 1.0.2), tidyr (>= 1.1.2), ggplot2 (>= 3.3.2)
+Imports: viridis (>= 0.5.1), magrittr (>= 2.0.1), stringr (>= 1.4.0), dplyr (>= 1.0.2), tidyr (>= 1.1.2), ggplot2 (>= 3.3.2)
 BugReports: https://github.com/vragh/seqvisr/issues
 URL: https://github.com/vragh/seqvisr
-License: `use_gpl3_license()`
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
