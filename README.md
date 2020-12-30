@@ -9,4 +9,4 @@ Currently consists of a single function--`msavisr`--that can be used to visualiz
 From the `R` commandline, execute `devtools::install_github("vragh/seqvisr")` to install the package. (The `R` package `devtools` must be installed and available for this operation.)
 
 ### Usage
-See `?seqvisr` and `?msavisr` (from within R) to access documentation and examples.
+See `?seqvisr` and `?msavisr` (from within `R`) to access documentation and examples.
