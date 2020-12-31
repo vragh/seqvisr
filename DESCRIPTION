@@ -1,8 +1,7 @@
 Package: seqvisr
 Title: Biological sequence visualization functions in R
-Version: 0.0.0.9000
-Authors@R: 
-    person(given = "Venket",
+Version: 0.1.0
+Authors@R: person(given = "Venket",
            family = "Raghavan",
            role = c("aut", "cre"),
            email = "vraghvragh@mailfence.com")
