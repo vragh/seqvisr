@@ -4,9 +4,9 @@
 \name{seqvisr-package}
 \alias{seqvisr}
 \alias{seqvisr-package}
-\title{seqvisr: Biological sequence visualization functions in R}
+\title{seqvisr: Biological Sequence Visualization Functions in R}
 \description{
-seqvisr enables visualization of biological sequences (and manipulation thereof) in R. It currently comprises of a single function msavisr that can be used to visualize multiple sequence alignments. Additional functions (and functionality) to be added in the future.
+Enables visualization of biological sequences (and manipulation thereof) in R. It currently comprises of a single function msavisr that can be used to visualize multiple sequence alignments. Additional functions (and functionality) to be added in the future.
 }
 \details{
 The only function available from seqvisr at the moment is \code{\link[=msavisr]{msavisr()}}.
