@@ -347,7 +347,7 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
     #unique(fasdf$roicol)
 
 
-    #For ordering the legend items
+    #For ordering the legend items - roilvls are ordered in ascending alphabetical order
     baselvls <- c("Match", "Mismatch", "Gap")
     roilvls <- unique(fasdf$roicol)[!(unique(fasdf$roicol) %in% baselvls)]
     roilvls <- roilvls[order(roilvls)]
@@ -370,23 +370,39 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
     #Basecolors
     if(!is.null(basecolors)){ #User-supplied basecolors
 
-      #Check if enough colors has been supplied, else reuse some colors
-      if(length(basecolors) < length(baselvls)){
-        warning("Not enough basecolors supplied, reusing some colors!!")
-        basecolors <- c(basecolors, rep_len(basecolors, abs(length(baselvls)-length(basecolors))))
-      }
+      #Check if too many colors have been supplied
       if(length(basecolors) > length(baselvls)){
-        warning("Too many basecolors supplied, will be leaving out the last few!!")
+        warning("ROI-mode: Too many basecolors supplied, will be leaving out the last few!!")
         basecolors <- basecolors[1:length(baselvls)]
+      }
+
+      #Check if enough colors has been supplied, else choose additional ones automatically
+      if(length(basecolors) < length(baselvls)){
+        warning("ROI-mode: Not enough basecolors supplied, choosing some random ones!!")
+
+        mydiff <- abs(length(baselvls) - length(basecolors))
+
+        repeat{
+          if(isTRUE(cbfcols)){
+            extracolors <- sample(unique(viridis::viridis(100)), mydiff)
+          } else{
+            extracolors <- sample(grDevices::colors(distinct = TRUE), mydiff)
+          }
+          if(!any(extracolors %in% basecolors)) { break }
+        }
+
+        basecolors <- c(basecolors, extracolors)
+
       }
 
     } else{#No user-supplied basecolors
 
       #Check if cbfcols is set and assign appropriately
       if(isTRUE(cbfcols)){
-        basecolors <- viridis::viridis(length(baselvls))
+        basecolors <- sample(unique(viridis::viridis(100)), length(baselvls))
       } else{
         basecolors <- c("gray", "black", "white")
+        #basecolors <- sample(grDevices::colors(distinct = TRUE), length(baselvls))
       }
 
     }
@@ -394,23 +410,49 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
     #roicolors
     if(!is.null(roicolors)){ #User-supplied roicolors
 
-      #Check if enough colors has been supplied, else reuse some colors
-      if(length(roicolors) < length(roilvls)){
-        warning("Not enough roicolors supplied, reusing some colors!!")
-        roicolors <- c(roicolors, rep_len(roicolors, length(roilvls)-length(roicolors)) )
-      }
+
+      #Check if too many colors have been supplied
       if(length(roicolors) > length(roilvls)){
-        warning("Too many roicolors supplied, will be leaving out the last few!!")
+        warning("ROI-mode: Too many roicolors supplied, will be leaving out the last few!!")
         roicolors <- roicolors[1:length(roilvls)]
+      }
+
+      #Check if enough colors has been supplied, else add colors automatically
+      if(length(roicolors) < length(roilvls)){
+        warning("ROI-mode: Not enough roicolors supplied, choosing some random ones!!")
+
+        mydiff <- abs(length(roilvls) - length(roicolors))
+
+        repeat{
+          if(isTRUE(cbfcols)){
+            extracolors <- sample(unique(viridis::viridis(100)), mydiff)
+          } else{
+            extracolors <- sample(grDevices::colors(distinct = TRUE), mydiff)
+          }
+
+          #Make sure the colors aren't ones that are already picked!!
+          if(!any(extracolors %in% c(roicolors, basecolors))) { break }
+        }
+
+        roicolors <- c(roicolors, extracolors)
       }
 
     } else{
 
       #Check if cbfcols is set and assign appropriately
       if(isTRUE(cbfcols)){
-        roicolors <- viridis::viridis(length(roilvls))
+        repeat{ #To ensure that the basecolors and roicolors aren't the same
+          roicolors <- sample(unique(viridis::viridis(100)), length(roilvls))
+          if(!any(roicolors %in% basecolors)) { break }
+        }
+
       } else{
-        roicolors <- grDevices::colors(distinct = TRUE)[1:length(roilvls)]
+
+        repeat{ #To ensure that the basecolors and roicolors aren't the same
+          roicolors <- sample(grDevices::colors(distinct = TRUE), length(roilvls))
+          if(!any(roicolors %in% basecolors)) { break }
+        }
+
       }
 
     }
@@ -492,13 +534,24 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
     #Basecolors
     if(!is.null(basecolors)){ #User-supplied basecolors
 
-      #Check if enough colors has been supplied, else reuse some colors
+      #Check if enough colors has been supplied, else add colors automatically
       if(length(basecolors) < length(baselvls)){
-        warning("Not enough basecolors supplied, reusing some colors!!")
-        basecolors <- c(basecolors, rep_len(basecolors, abs(length(baselvls)-length(basecolors))))
+        warning("No-ROI-mode: Not enough basecolors supplied, choosing some random ones!!")
+
+        mydiff <- abs(length(baselvls) - length(basecolors))
+
+        repeat{
+          if(isTRUE(cbfcols)){
+            extracolors <- sample(unique(viridis::viridis(100)), mydiff)
+          } else{
+            extracolors <- sample(grDevices::colors(distinct = TRUE), mydiff)
+          }
+          if(!any(extracolors %in% basecolors)) { break }
+        }
       }
+
       if(length(basecolors) > length(baselvls)){
-        warning("Too many basecolors supplied, will be leaving out the last few!!")
+        warning("No-ROI-mode: Too many basecolors supplied, will be leaving out the last few!!")
         basecolors <- basecolors[1:length(baselvls)]
       }
 
@@ -506,12 +559,15 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
 
       #Check if cbfcols is set and assign appropriately
       if(isTRUE(cbfcols)){
-        basecolors <- viridis::viridis(length(baselvls))
+        basecolors <- sample(unique(viridis::viridis(100)), length(baselvls))
       } else{
         basecolors <- c("gray", "black", "white")
       }
 
     }
+
+    cbPalette <- basecolors
+
 
     #Not ROIs so only two layers: matches and non-matches as layers for ggplot()
     matches <- fasdf %>% dplyr::filter(outcol == "Match")
