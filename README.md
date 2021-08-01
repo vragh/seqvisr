@@ -21,15 +21,19 @@ domain structure diagrams like the one below:
 
 ## Installation
 
-From the `R` commandline, execute
-`devtools::install_github("vragh/seqvisr")` to install the package. (The
-`R` package [`devtools`](https://github.com/r-lib/devtools) must be
-installed and available for this operation.)
+Ensure that the package [`devtools`](https://github.com/r-lib/devtools)
+is installed.
+
+Then execute
+`devtools::install_github("vragh/seqvisr", build_manual = TRUE, build_vignettes = TRUE)`
+from within `R` to install the package. If the manual and package
+vignette are not necessary,
+`build_manual = TRUE, build_vignettes = TRUE` can be omitted.
 
 ## Usage
 
 See `?seqvisr`, `?msavisr`, and `?pdomvisr` (from within `R`) to access
-documentation and examples. Run `vignette(seqvisr)` to access the
+documentation and examples. Run `browseVignettes(seqvisr)` to access the
 vignette.
 
 ## License
