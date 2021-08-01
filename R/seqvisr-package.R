@@ -1,6 +1,6 @@
 #' @details
-#' The only function available from seqvisr at the moment is [msavisr()].
+#' R functions for visualization of biological sequences.
 #'
-#' @keywords internal
+#' @keywords "sequence visualization" "protein domains" "multiple sequence alignment"
 "_PACKAGE"
 #> [1] "_PACKAGE"

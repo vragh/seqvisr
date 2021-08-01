@@ -1,15 +1,17 @@
 Package: seqvisr
 Title: Biological Sequence Visualization Functions in R
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person(given = "Venket",
            family = "Raghavan",
            role = c("aut", "cre"),
            email = "vraghvragh@mailfence.com")
-Description: Enables visualization of biological sequences (and manipulation thereof) in R. It currently comprises of a single function msavisr that can be used to visualize multiple sequence alignments. Additional functions (and functionality) to be added in the future.
-Imports: viridis, magrittr, stringr, dplyr, tidyr, ggplot2, grDevices
+Description: Enables visualization of biological sequences (and manipulation thereof) in R.
+Imports: viridis, magrittr, stringr, dplyr, tidyr, ggplot2, grDevices, data.table, tibble, scales
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
 BugReports: https://github.com/vragh/seqvisr/issues
 URL: https://github.com/vragh/seqvisr
-License: GPL-3 + file LICENSE
+License: GPL-3 + file LICENCE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

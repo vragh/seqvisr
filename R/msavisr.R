@@ -140,15 +140,13 @@ msavisr <- function(mymsa = NULL, myref = NULL, mypath = NULL, refontop = TRUE, 
 
 
   #Setting up the path to the object
-  if(is.null(mypath)){
-    mypath <- mymsa
-  } else{
-    mypath <- paste0(mypath, "/", mymsa)
+  if(!is.null(mypath)){
+    mymsa <- paste0(mypath, "/", mymsa)
   }
 
 
   #Reading in the fasta data as a newline-delimited data.frame
-  df <- utils::read.table(mypath, sep = "\n")
+  df <- utils::read.table(mymsa, sep = "\n")
 
   #Container data.frame where all the computations will occur
   fasdf <- data.frame(curhead = c(), curseq = c(), stringsAsFactors = FALSE)

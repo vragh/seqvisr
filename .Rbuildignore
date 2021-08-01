@@ -1,2 +1,6 @@
 ^seqvisr\.Rproj$
 ^\.Rproj\.user$
+.travis.yml
+^LICENSE
+^doc$
+^Meta$
