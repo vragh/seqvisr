@@ -31,3 +31,8 @@ installed and available for this operation.)
 See `?seqvisr`, `?msavisr`, and `?pdomvisr` (from within `R`) to access
 documentation and examples. Run `vignette(seqvisr)` to access the
 vignette.
+
+## License
+
+Released under GPL-3. A copy of the license file can be found in the
+file `LICENSE` (`LICENCE` is just for `R` purposes).
