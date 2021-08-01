@@ -1,5 +1,6 @@
 ---
 title: "seqvisr"
+output: github_document
 ---
 
 [![Build Status](https://travis-ci.com/vragh/seqvisr.svg?branch=main)](https://travis-ci.com/vragh/seqvisr)
