@@ -1,0 +1,33 @@
+seqvisr
+================
+
+[![Build
+Status](https://travis-ci.com/vragh/seqvisr.svg?branch=main)](https://travis-ci.com/vragh/seqvisr)
+
+# seqvisr
+
+Biological sequence visualization functions in `R`.
+
+Consists of two functions: `msavisr()` and `pdomvisr()`.
+
+`msavisr()` takes `FASTA`-formatted multiple sequence alignments (MSAs)
+as inputs and produces visualizations like the example below:
+<img src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png" alt="msavisr" width="60%" height="60%"/>
+
+`pdomvisr()` takes appropriately formatted tabular data and produces
+domain structure diagrams like the one below:
+
+<img src="./docs/articles/seqvisr_files/figure-html/label_small-1.png" alt="pdomvisr" width="60%" height="60%"/>
+
+## Installation
+
+From the `R` commandline, execute
+`devtools::install_github("vragh/seqvisr")` to install the package. (The
+`R` package [`devtools`](https://github.com/r-lib/devtools) must be
+installed and available for this operation.)
+
+## Usage
+
+See `?seqvisr`, `?msavisr`, and `?pdomvisr` (from within `R`) to access
+documentation and examples. Run `vignette(seqvisr)` to access the
+vignette.
