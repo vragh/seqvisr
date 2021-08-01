@@ -6,10 +6,10 @@
 \alias{seqvisr-package}
 \title{seqvisr: Biological Sequence Visualization Functions in R}
 \description{
-Enables visualization of biological sequences (and manipulation thereof) in R. It currently comprises of a single function msavisr that can be used to visualize multiple sequence alignments. Additional functions (and functionality) to be added in the future.
+Enables visualization of biological sequences (and manipulation thereof) in R.
 }
 \details{
-The only function available from seqvisr at the moment is \code{\link[=msavisr]{msavisr()}}.
+R functions for visualization of biological sequences.
 }
 \seealso{
 Useful links:
@@ -23,4 +23,10 @@ Useful links:
 \strong{Maintainer}: Venket Raghavan \email{vraghvragh@mailfence.com}
 
 }
-\keyword{internal}
+\keyword{"multiple}
+\keyword{"protein}
+\keyword{"sequence}
+\keyword{alignment"}
+\keyword{domains"}
+\keyword{sequence}
+\keyword{visualization"}
