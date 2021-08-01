@@ -33,8 +33,8 @@ vignette are not necessary,
 ## Usage
 
 See `?seqvisr`, `?msavisr`, and `?pdomvisr` (from within `R`) to access
-documentation and examples. Run `browseVignettes(seqvisr)` to access the
-vignette.
+documentation and examples. Run `browseVignettes("seqvisr")` to access
+the vignette.
 
 ## License
 
