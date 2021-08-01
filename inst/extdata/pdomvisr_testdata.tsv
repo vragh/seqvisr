@@ -1,0 +1,8 @@
+prot_acc	seq_len	offset	signature_desc	start_loc	stop_loc
+Seq1	579	0	dom1	308	407
+Seq1	579	0	dom2	133	184
+Seq2	855	0	dom1	275	373
+Seq2	855	0	dom2	118	216
+Seq3	855	0	dom22	29	89
+Seq4	1197	0	NA	0	0
+Seq5	325	100	dom11	254	313
