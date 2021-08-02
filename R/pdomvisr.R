@@ -126,8 +126,9 @@ tsvtogginp <- function(inpdf = NULL){
     for(j in 1:base::nrow(annots)){
       if(is.na(outdf$posdesc[i])){
 
-
-        if(outdf$pos[i] >= annots$start_loc[j] & outdf$pos[i] <= annots$stop_loc[j]){
+        #The as.numeric() transformation of the start and stop locations is important as
+        #in some edge cases, the values in those cells are being treated as characters.
+        if(outdf$pos[i] >= as.numeric(annots$start_loc[j]) & outdf$pos[i] <= as.numeric(annots$stop_loc[j])){
           outdf$posdesc[i] <- annots$signature_desc[j]
           outdf$layer[i] <- "feature"
           outdf$fset[i] <- annots$fset[j]
@@ -294,25 +295,27 @@ tsvtogginp_multi <- function(inpdf = NULL){
 #' sequence offset, domain description, domain start coordinate, domain end coordinate.
 #'
 #'
-#' @usage pdomvisr(mytsv = NULL, mypath = NULL,
+#' @usage pdomvisr(inpdat = NULL, mypath = NULL,
 #' nbreaks = NULL, cbfcols = FALSE,
-#' legend = TRUE, show_offsets = TRUE, label_size = "auto",
+#' legend = TRUE, show_offsets = TRUE,
+#' label_size = "auto", featcols = NULL,
 #' hbase = 0.2, hfeat = 2.4*hbase, hoff = 0.8*hbase,
 #' alpbase = 1.0, alpfeat = 1.0, alpoff = 0.05,
 #' fillbase = "black", filloff = "white",
-#' colorbase = "black", coloroff = "gray")
+#' colorbase = "black", coloroff = "gray",
+#' nudge_x = 0.0, nudge_y = 0.5)
 #'
 #'
-#' @param mytsv (character string or name of an object, mandatory) the character string may be the
+#' @param inpdat (character string or name of an object, mandatory) the character string may be the
 #' name of a file or the full path to it (in which case mypath should be set to NULL). The file must
 #' be a table containing the information necessary to plot the domain structure diagram. Alternatively,
-#' mytsv can also be supplied the name of an object in R's environment (e.g., a data.frame containing
+#' inpdat can also be supplied the name of an object in R's environment (e.g., a data.frame containing
 #' the requisite data). This is useful when the input data needs to be pre-processed in R first. The
 #' path/filename option is more suitable when pdomvisr is being called only for plotting. In this case,
 #' data.table's fread() is used to read the data into the function first. Please see the 'Details' section
 #' for information on how the input data must be formatted.
 #'
-#' @param mypath (character string, optional) in the event that mytsv is supplied the name of a file, the
+#' @param mypath (character string, optional) in the event that inpdat is supplied the name of a file, the
 #' path to where this file is located can be supplied through mypath.
 #'
 #' @param nbreaks (numeric, optional) controls the number of X-axis ticks in the plotted domain structure
@@ -333,7 +336,13 @@ tsvtogginp_multi <- function(inpdf = NULL){
 #' @param label_size (character or numeric, optional) controls whether the domain descriptions are displayed as
 #' labels on the domains. Also controls the size of the text if the labels are displayed. The size can be
 #' controlled by supplying a positive integer > 0. Supplying 0 prevents the labels from being displayed. Passing
-#' "auto" leaves the size estimation to R. Note: this does not affect the legend. (Set to "auto" by default.)
+#' "auto" leaves the size estimation to R. If set to "repel", then the labels are drawn offset from the features
+#' and connected to them by straight lines. If set to "repel", the arguments nudge_x and nudge_y (see below) can
+#' be adjusted by the user to vary the positioning of the labels. Note: this argument's values do not affect the
+#' legend. (Set to "auto" by default.)
+#'
+#' @param featcols (character vector, optional) controls the colors assigned to the features/domains. As many
+#' colors as there are unique features in the data set must be supplied.
 #'
 #' @param hbase (numeric, optional) controls the height of the tiles corresponding to the non-domain portions
 #' of the sequence. (Set to 0.2 by default.)
@@ -368,6 +377,14 @@ tsvtogginp_multi <- function(inpdf = NULL){
 #' @param coloroff (character, optional) line color for the tiles representing the offset sequence. Any value
 #' accepted by ggplot2's "color" is accepted here, as this just passes the value on to that particular argument.
 #' (Set to "gray" by default.)
+#'
+#' @param nudge_x (numeric, optional) if label_size is set to "repel", adjusting this value changes the horizontal
+#' starting position of the label (this is the same parameter as ggrepel::geom_text_repel()'s nudge_x; so see that
+#' function's help page for more details).
+#'
+#' @param nudge_y (numeric, optional) if label_size is set to "repel", adjusting this value changes the vertical
+#' starting position of the label (this is the same parameter as ggrepel::geom_text_repel()'s nudge_y; so see that
+#' function's help page for more details).
 #'
 #' @details
 #' pdomvisr() plots a domain structure diagram given the coordinates of domains in one or more sequences.
@@ -425,7 +442,7 @@ tsvtogginp_multi <- function(inpdf = NULL){
 #' inpath <- system.file("extdata", "pdomvisr_testdata.tsv", package = "seqvisr", mustWork = TRUE)
 #'
 #' #Default function call with colorblind-friendly colors.
-#' pdomvisr(mytsv = inpath, cbfcols = TRUE)
+#' pdomvisr(inpdat = inpath, cbfcols = TRUE)
 #' }
 #'
 #' @importFrom data.table fread
@@ -438,18 +455,21 @@ tsvtogginp_multi <- function(inpdf = NULL){
 #'
 #' @importFrom scales pretty_breaks
 #'
+#' @importFrom ggrepel geom_text_repel
+#'
 #' @import dplyr ggplot2
 #'
 #' @export
 
-pdomvisr <- function(mytsv = NULL, mypath = NULL,
+pdomvisr <- function(inpdat = NULL, mypath = NULL,
                      nbreaks = NULL, cbfcols = FALSE,
                      legend = TRUE, show_offsets = TRUE,
-                     label_size = "auto",
+                     label_size = "auto", featcols = NULL,
                      hbase = 0.2, hfeat = 2.4*hbase, hoff = 0.8*hbase,
                      alpbase = 1.0, alpfeat = 1.0, alpoff = 0.05,
                      fillbase = "black", filloff = "white",
-                     colorbase = "black", coloroff = "gray"){
+                     colorbase = "black", coloroff = "gray",
+                     nudge_x = 0.0, nudge_y = 0.5){
 
   #To avoid the "no visible binding for global variable" and "Undefined global functions or variables:"
   #warnings during devtools::check()
@@ -459,36 +479,36 @@ pdomvisr <- function(mytsv = NULL, mypath = NULL,
   label <- NULL
 
   #Stop if input is empty.
-  if(is.null(mytsv)){
-    stop("The domain annotation table is a mandatory input!! Please provide this via the mytsv argument!!")
+  if(is.null(inpdat)){
+    stop("The domain annotation table is a mandatory input!! Please provide this via the inpdat argument!!")
   }
 
-  #Checking to see if what is supplied to mytsv is a path or an object.
-  if(is.data.frame(mytsv) | data.table::is.data.table(mytsv) | tibble::is_tibble(mytsv)){
+  #Checking to see if what is supplied to inpdat is a path or an object.
+  if(is.data.frame(inpdat) | data.table::is.data.table(inpdat) | tibble::is_tibble(inpdat)){
     #Data is already loaded into R, do nothing.
-    inptsv <- mytsv
+    inpdf <- inpdat
   } else{
     #Setting up the path to the object
     if(!is.null(mypath)){
-      mytsv <- paste0(mypath, "/", mytsv)
+      inpdat <- paste0(mypath, "/", inpdat)
     }
 
     #Reading in the data using data.table::fread.
-    inptsv <- data.table::fread(mytsv)
+    inpdf <- data.table::fread(inpdat)
   }
 
 
   #Converting data for plotting with tsvtogginp_multi.
-  inptsv <- tsvtogginp_multi(inptsv)
+  inpdf <- tsvtogginp_multi(inpdf)
 
 
 
   #The tsvtogginp() setup (accessed through tsvtogginp_multi)
   #classifies the input into 3 layers: offset, base, and feature.
   #These layers will be plotted separately to maximize control.
-  lbase <- inptsv %>% dplyr::filter(layer == "base")
-  lfeat <- inptsv %>% dplyr::filter(layer == "feature")
-  loff <- inptsv %>% dplyr::filter(layer == "offset")
+  lbase <- inpdf %>% dplyr::filter(layer == "base")
+  lfeat <- inpdf %>% dplyr::filter(layer == "feature")
+  loff <- inpdf %>% dplyr::filter(layer == "offset")
 
 
   #Heights are set relative to the base layer's height (for now).
@@ -525,7 +545,7 @@ pdomvisr <- function(mytsv = NULL, mypath = NULL,
   #highest value of pos in the dataset (i.e., longest sequence).
   #nbreaks <- NULL
   if(is.null(nbreaks)){
-    nbreaks <- base::round(base::max(inptsv$pos)/100)
+    nbreaks <- base::round(base::max(inpdf$pos)/100)
   }
 
 
@@ -536,19 +556,46 @@ pdomvisr <- function(mytsv = NULL, mypath = NULL,
   if(nrow(lfeat) != 0){
 
     myplt <- ggplot2::ggplot() +
-      ggplot2::geom_tile(data = lbase, aes(x = pos, y = prot_acc, fill = posdesc, height = hbase),
+      ggplot2::geom_tile(data = lbase, ggplot2::aes(x = pos, y = prot_acc, fill = posdesc, height = hbase),
                          alpha = alpbase, fill = fillbase, color = colorbase) +
-      ggplot2::geom_tile(data = lfeat, aes(x = pos, y = prot_acc, fill = posdesc, height = hfeat),
+      ggplot2::geom_tile(data = lfeat, ggplot2::aes(x = pos, y = prot_acc, fill = posdesc, height = hfeat),
                          alpha = alpfeat) +
       ggplot2::scale_x_continuous(breaks = scales::pretty_breaks(n = nbreaks)) +
       ggplot2::theme_classic() +
       ggplot2::labs(x = "Position", y = "Sequence", fill = "Features")
 
+
+    #VERY IMPORTANT - CONTROL OF GEOM_TEXT SIZE, AND WHETHER IT IS ACTIVATED AT ALL
+    #OR NOT.
+    #Only relevant if the lfeat layer exists at all, hence why it is inside this if statement.
+    #label_size <- "auto"
+    #label_size <- "0.5"
+    #label_size <- "repel"; nudge_x <- 0.5; nudge_y <- 0.5
+    if(label_size == "auto"){
+      myplt <- myplt +
+        ggplot2::geom_text(data = lfeat, ggplot2::aes(x = pos, y = prot_acc, label = label),
+                           na.rm = TRUE)
+    } else if(is.numeric(label_size)){
+      if(label_size != 0){
+        myplt <- myplt +
+          ggplot2::geom_text(data = lfeat, ggplot2::aes(x = pos, y = prot_acc, label = label),
+                             size = label_size, na.rm = TRUE)
+      }
+    } else if(label_size == "repel"){
+      myplt <- myplt +
+        ggrepel::geom_text_repel(data = lfeat, ggplot2::aes(x = pos, y = prot_acc, label = label),
+                                 max.iter = 1.0, min.segment.length = 0,
+                                 nudge_y = nudge_y, nudge_x = nudge_x,
+                                 na.rm = TRUE, direction = "both")
+    }
+
+
+
   } else{
 
     #Else just plot the base layer.
     myplt <- ggplot2::ggplot() +
-      ggplot2::geom_tile(data = lbase, aes(x = pos, y = prot_acc, fill = posdesc, height = hbase),
+      ggplot2::geom_tile(data = lbase, ggplot2::aes(x = pos, y = prot_acc, fill = posdesc, height = hbase),
                          alpha = alpbase, fill = fillbase, color = colorbase) +
       ggplot2::scale_x_continuous(breaks = scales::pretty_breaks(n = nbreaks)) +
       ggplot2::theme_classic() +
@@ -563,21 +610,8 @@ pdomvisr <- function(mytsv = NULL, mypath = NULL,
   #show_offsets = TRUE
   if(show_offsets && nrow(loff) != 0){
     myplt <- myplt +
-      ggplot2::geom_tile(data = loff, aes(x = pos, y = prot_acc, height = hoff),
+      ggplot2::geom_tile(data = loff, ggplot2::aes(x = pos, y = prot_acc, height = hoff),
                          alpha = alpoff, fill = filloff, color = coloroff)
-  }
-
-  #VERY IMPORTANT - CONTROL OF GEOM_TEXT SIZE, AND WHETHER IT IS ACTIVATED AT ALL
-  #OR NOT.
-  #label_size <- "auto"
-  if(label_size == "auto"){
-    myplt <- myplt +
-      ggplot2::geom_text(data = lfeat, aes(x = pos, y = prot_acc, label = label), na.rm = TRUE)
-  } else if(is.numeric(label_size)){
-    if(label_size != 0){
-      myplt <- myplt +
-        ggplot2::geom_text(data = lfeat, aes(x = pos, y = prot_acc, label = label), size = label_size, na.rm = TRUE)
-    }
   }
 
   #Use colorblind-friendly colors?
@@ -588,6 +622,16 @@ pdomvisr <- function(mytsv = NULL, mypath = NULL,
 
     myplt <- myplt +
       ggplot2::scale_fill_manual(name = "", values = colpal, drop = TRUE)
+  }
+
+  #The user can also supply their own colors for the features.
+  #featcols <- NULL
+  if(!is.null(featcols)){
+    if(length(featcols) != length(unique(lfeat$posdesc))){
+      stop("Please supply as many colors as there are unique features in your annotation data!!")
+    }
+    myplt <- myplt +
+      ggplot2::scale_fill_manual(name = "", values = featcols, drop = TRUE)
   }
 
   #Show the legend?

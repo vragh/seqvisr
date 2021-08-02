@@ -5,3 +5,5 @@
 ^doc$
 ^Meta$
 ^docs$
+README.Rmd
+README.html
