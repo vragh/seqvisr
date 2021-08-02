@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seqvisr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
       <h1 data-toc-skip>seqvisr</h1>
                         <h4 class="author">Venket Raghavan</h4>
             
-            <h4 class="date">7/31/2021</h4>
+            <h4 class="date">01.08.2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/vragh/seqvisr/blob/master/vignettes/seqvisr.Rmd"><code>vignettes/seqvisr.Rmd</code></a></small>
       <div class="hidden name"><code>seqvisr.Rmd</code></div>
@@ -124,7 +124,7 @@
 
 <span class="co">#Basic visualization with the sequence "Ref0" set as the reference.</span>
 <span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/msavisr_examples-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/msavisr_examples-1.png" width="614.4"></p>
 <p>The basic features highlighted by <code><a href="../reference/msavisr.html">msavisr()</a></code> are the matches, mismatches, and gaps in the MSA. By default, <code><a href="../reference/msavisr.html">msavisr()</a></code> uses colorblind-friendly colors. Set <code>cbfcols = FALSE</code> to disable this.</p>
 <p>The defining feature of <code><a href="../reference/msavisr.html">msavisr()</a></code> is that arbitrary portions of one or more sequences can be highlighted by specifying them as <code>regions of interest</code> (<code>ROI</code>s). These will show up with their own colors in addition to the matches, mismatches, and gaps.</p>
 <p>Each <code>ROI</code> must be indicated as a vector wherein the first value indicates the sequence (optional), the second the position(s) as integer (ranges), and the third an identifier string for the ROI.</p>
@@ -139,7 +139,7 @@
 <code class="sourceCode R"><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/roi1-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/roi1-1.png" width="614.4"></p>
 <p>An example with additional <code>ROI</code>s.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#A ROI that indicates a single column (number 14) in the MSA as pseudouridines (a type of a modified nucleic acid).</span>
@@ -155,20 +155,20 @@
 <span class="va">roi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span>, <span class="va">roi2</span>, <span class="va">roi3</span>, <span class="va">roi4</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="va">roi_list</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/roi_list-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/roi_list-1.png" width="614.4"></p>
 <p>The dimensions of the matches (i.e., conserved positions), non-matches (i.e., mismatches and gaps), and <code>ROI</code>s can be adjusted freely. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span>, hroi <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/dim_ctrl-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/dim_ctrl-1.png" width="614.4"></p>
 <p>The user can also set the colors for the matches, mismatches, and gaps manually through the <code>basecolors</code> argument. Likewise, custom colors for the <code>ROI</code>s can be set through the <code>roicolors</code> argument. In both cases colors should be supplied as alphanumeric vectors, and there must be as many colors as there are features. (But <code><a href="../reference/msavisr.html">msavisr()</a></code> will attempt to provide its own color replacements if any are missing.)</p>
 <p>Supplying custom colors is especially useful in cases where <code><a href="../reference/msavisr.html">msavisr()</a></code> assigns colors that are too close to one another in colorspace. Also, since <code><a href="../reference/msavisr.html">msavisr()</a></code> chooses colors randomly, custom colors may be preferrable in situations where the colors should be maintained over multiple plots. (Note: <code><a href="../reference/msavisr.html">msavisr()</a></code> will ALWAYS attempt to assign unique colors to every feature including the basic features.)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span>, hroi <span class="op">=</span> <span class="fl">0.8</span>, roicolors <span class="op">=</span> <span class="op">(</span><span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/color_demo-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/color_demo-1.png" width="614.4"></p>
 <p>Finally, the function is sequence alphabet agnostic. So it will work with both amino acid and nucleotide sequences. However, its capability to handle amino acid mismatches is only very basic at the moment. For instance, it cannot recognize conservative substitutions, and will color all mismatches with the same color.</p>
 <p>Please see <code><a href="../reference/msavisr.html">?msavisr</a></code> for more information on this function.</p>
 </div>
@@ -194,7 +194,7 @@
 <span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>
 
 <span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/pdomvisr-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/pdomvisr-1.png" width="614.4"></p>
 <p>For those interested, this is what <code>inpdat</code> looks like:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">inpdat</span></code></pre></div>
@@ -205,48 +205,59 @@
 ## 4     Seq2     855      0           dom2       118      216</code></pre>
 <p>It is similar to the input table described above.</p>
 <p><strong>Note:</strong> although the data were read into <code>R</code> using <code>read.table</code> in the example above, this is not strictly necessary for <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. The user can also simply supply it the path to the file, and it will work all the same as long as the data in the file formatted as described above.</p>
-<p>One issue that is immediately apparent is that the labels on the domains are not easy to read. By default, <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> lets <code>ggplot2</code> calculate the label sizes automatically (<code>label_size = "auto"</code>). To amend this, the labels can either be switched off (by setting <code>label_size = 0</code>) or reduced in size.</p>
+<p>One issue that is immediately apparent is that the labels on the domains are not easy to read. By default, <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> lets <code>ggplot2</code> calculate the label sizes automatically (<code>label_size = "auto"</code>). To amend this, the labels can either be switched off (by setting <code>label_size = 0</code>) or reduced in size. Alternatively, if <code>label_size</code> is set to <code>"repel"</code>, labels will be drawn displaced from their corresponding features, with the two being connected by straight lines.</p>
 <p>Plot with labeling switched off:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/label_off-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/label_off-1.png" width="614.4"></p>
 <p>Plot with labeling switched off:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/label_small-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/label_small-1.png" width="614.4"></p>
+<p>Plot with labeling switched off:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="st">"repel"</span><span class="op">)</span></code></pre></div>
+<p><img src="seqvisr_files/figure-html/label_repel-1.png" width="614.4"></p>
 <p>One potential issue with the tabular output of most annotation tools is that <em>sequences that have no annotations</em> assigned to them are <em>not</em> listed in the table. There can be scenarios where a sequence with no domains must be visualized alongside its counterparts that do.</p>
 <p><code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> can handle this quite easily.</p>
 <p>In such instances, the user simply needs to add (at least) one row for this featureless sequence. The sequence name, sequence length, and offset (if needed) must be specified correctly. The column corresponding to the domain name should carry a <code>NA</code> string, and the start and end positions should be set to 0. This is illustrated below.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">6</span>, <span class="op">]</span>
 <span class="va">inpdat</span></code></pre></div>
 <pre><code>##   prot_acc seq_len offset signature_desc start_loc stop_loc
 ## 6     Seq4    1197      0           &lt;NA&gt;         0        0</code></pre>
 <p>And plotting this would result in this:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/featureless_seq_plotted-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/featureless_seq_plotted-1.png" width="614.4"></p>
 <p>There is no legend because there are no domains/features to be displayed.</p>
 <p>If this were to be displayed alongside other sequences, it might look like this:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>
 <span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/featureless_w_others-1.png" width="576"></p>
+<p><img src="seqvisr_files/figure-html/featureless_w_others-1.png" width="614.4"></p>
 <p>An important feature of <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> is that it accepts an “offset” parameter that indicates how far away from the actual first position of the sequence the indicated sequence itself is. For instance, a sequence of length 300 might actually be a fragment of a longer sequence that is 500 residues long, with the 300 residue-long sequence being the latter half of it. In such an instance, the rows for this sequence should have an offset value of 200.</p>
 <p>This is demonstrated with a small example below where the same sequence is plotted with and without an offset:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">w_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"w_offset"</span>, <span class="fl">300</span>, <span class="fl">200</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span>
 <span class="va">no_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no_offset"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span>
 
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">w_offset</span>, <span class="va">no_offset</span><span class="op">)</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/offset_example-1.png" width="576"></p>
+<span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span>inpdat <span class="op">=</span> <span class="va">df</span><span class="op">)</span></code></pre></div>
+<p><img src="seqvisr_files/figure-html/offset_example-1.png" width="614.4"></p>
 <p>As can be seen, the only difference is that the sequence with the offset supplied starts further down along the X-axis. By default, the “sequence” corresponding to the offset length is shown. This can be disabled by setting <code>show_offsets = FALSE</code>.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span>, show_offsets <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="seqvisr_files/figure-html/offset_disable-1.png" width="576"></p>
-<p>The heights, transparencies, and fill colors for the non-feature portions of the sequences can be adjusted by the user. In addition, the number of breaks on the X-axis, legend visibility, and <strong>usage of colorblind-friendly colors</strong> can also be set by the user. Refer to the help page (<code><a href="../reference/pdomvisr.html">?pdomvisr</a></code>) for more details on these.</p>
+<p><img src="seqvisr_files/figure-html/offset_disable-1.png" width="614.4"></p>
+<p>The colors assigned to the features are user-configurable. Automatic allocation of <strong>colorblind-friendly colors</strong> is possible with <code>cbfcols = TRUE</code>. If the user wishes to specify colors manually, this can be done by passing a <code>character vector</code> of colors to <code>featcols</code>. The user must supply as many colors as there are unique features in the sequences. Features with the same name (e.g, “dom1”) in different sequences are counted as towards the same feature. One way to estimate the number of colors needed would be to use <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> on the column containing the feature/domain names.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span>, cbfcols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="seqvisr_files/figure-html/cbfcols-1.png" width="614.4"></p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span>, featcols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="seqvisr_files/figure-html/featcols-1.png" width="614.4"></p>
+<p>The heights, transparencies, and fill colors for the non-feature portions of the sequences can be adjusted by the user. In addition, the number of breaks on the X-axis, and legend visibility can also be set by the user. Refer to the help page (<code><a href="../reference/pdomvisr.html">?pdomvisr</a></code>) for more details on these.</p>
 </div>
   </div>
 

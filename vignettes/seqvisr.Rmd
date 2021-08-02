@@ -1,10 +1,10 @@
 ---
 title: "seqvisr"
 author: "Venket Raghavan"
-date: "7/31/2021"
+date: "01.08.2021"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Biological sequence visualization in R}
+  %\VignetteIndexEntry{seqvisr}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -68,7 +68,7 @@ Given the path to a `FASTA`-formatted file containing an MSA, the user can use `
 Here is an example illustrating the the basic function call.
 
 
-```{r msavisr_examples, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r msavisr_examples, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 #Loading sample data.
 testmsa <- system.file("extdata", "testaln_mrna.fasta", package = "seqvisr", mustWork = TRUE)
 
@@ -97,7 +97,7 @@ EVEN IF ONLY ONE `ROI` is being passed to `msavisr()`, it MUST be enclosed by th
 
 Here is an example of `msavisr()` with a single `ROI` named "Ref0 Domain1" that covers positions 100 to 110 on the sequence "Ref0".
 
-```{r, roi1, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r, roi1, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 roi1 <- c("Ref0", 100:110, "Ref0 Domain1")
 
 msavisr(mymsa = testmsa, myref = "Ref0", myroi = list(roi1))
@@ -106,7 +106,7 @@ msavisr(mymsa = testmsa, myref = "Ref0", myroi = list(roi1))
 An example with additional `ROI`s.
 
 
-```{r, roi_list, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r, roi_list, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 #A ROI that indicates a single column (number 14) in the MSA as pseudouridines (a type of a modified nucleic acid).
 roi2 <- c(14, "Pseudouridine")
 
@@ -124,7 +124,7 @@ msavisr(mymsa = testmsa, myref = "Ref0", myroi = roi_list)
 
 The dimensions of the matches (i.e., conserved positions), non-matches (i.e., mismatches and gaps), and `ROI`s can be adjusted freely. For example:
 
-```{r, dim_ctrl, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r, dim_ctrl, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 roi1 <- c("Ref0", 100:110, "Ref0 Domain1")
 
 msavisr(mymsa = testmsa, myref = "Ref0", myroi = list(roi1), hroi = 0.8)
@@ -134,7 +134,7 @@ The user can also set the colors for the matches, mismatches, and gaps manually 
 
 Supplying custom colors is especially useful in cases where `msavisr()` assigns colors that are too close to one another in colorspace. Also, since `msavisr()` chooses colors randomly, custom colors may be preferrable in situations where the colors should be maintained over multiple plots. (Note: `msavisr()` will ALWAYS attempt to assign unique colors to every feature including the basic features.)
 
-```{r, color_demo, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r, color_demo, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 roi1 <- c("Ref0", 100:110, "Ref0 Domain1")
 
 msavisr(mymsa = testmsa, myref = "Ref0", myroi = list(roi1), hroi = 0.8, roicolors = ("red"))
@@ -170,7 +170,7 @@ This is the standard (and only accepted) input format for `pdomvisr()`. `pdomvis
 
 Here is `pdomvisr()` in action.
 
-```{r, pdomvisr, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r, pdomvisr, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 #Loading some sample data.
 inpath <- system.file("extdata", "pdomvisr_testdata.tsv", package = "seqvisr", mustWork = TRUE)
 annotdat <- read.table(inpath, header = TRUE)
@@ -181,7 +181,7 @@ pdomvisr(inpdat)
 
 For those interested, this is what `inpdat` looks like:
 
-```{r inpdat_peek, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r inpdat_peek, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 inpdat
 ```
 
@@ -189,18 +189,24 @@ It is similar to the input table described above.
 
 **Note:** although the data were read into `R` using `read.table` in the example above, this is not strictly necessary for `pdomvisr()`. The user can also simply supply it the path to the file, and it will work all the same as long as the data in the file formatted as described above.
 
-One issue that is immediately apparent is that the labels on the domains are not easy to read. By default, `pdomvisr()` lets `ggplot2` calculate the label sizes automatically (`label_size = "auto"`). To amend this, the labels can either be switched off (by setting `label_size = 0`) or reduced in size.
+One issue that is immediately apparent is that the labels on the domains are not easy to read. By default, `pdomvisr()` lets `ggplot2` calculate the label sizes automatically (`label_size = "auto"`). To amend this, the labels can either be switched off (by setting `label_size = 0`) or reduced in size. Alternatively, if `label_size` is set to `"repel"`, labels will be drawn displaced from their corresponding features, with the two being connected by straight lines.
 
 Plot with labeling switched off:
 
-```{r label_off, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r label_off, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 pdomvisr(inpdat, label_size = 0)
 ```
 
 Plot with labeling switched off:
 
-```{r label_small, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r label_small, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 pdomvisr(inpdat, label_size = 2)
+```
+
+Plot with labeling switched off:
+
+```{r label_repel, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
+pdomvisr(inpdat, label_size = "repel")
 ```
 
 One potential issue with the tabular output of most annotation tools is that *sequences that have no annotations* assigned to them are *not* listed in the table. There can be scenarios where a sequence with no domains must be visualized alongside its counterparts that do.
@@ -209,14 +215,14 @@ One potential issue with the tabular output of most annotation tools is that *se
 
 In such instances, the user simply needs to add (at least) one row for this featureless sequence. The sequence name, sequence length, and offset (if needed) must be specified correctly. The column corresponding to the domain name should carry a `NA` string, and the start and end positions should be set to 0. This is illustrated below.
 
-```{r featureless_seq, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r featureless_seq, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 inpdat <- annotdat[6, ]
 inpdat
 ```
 
 And plotting this would result in this:
 
-```{r featureless_seq_plotted, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r featureless_seq_plotted, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 pdomvisr(inpdat)
 ```
 
@@ -224,7 +230,7 @@ There is no legend because there are no domains/features to be displayed.
 
 If this were to be displayed alongside other sequences, it might look like this:
 
-```{r featureless_w_others, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r featureless_w_others, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 inpdat <- annotdat[4:6, ]
 pdomvisr(inpdat)
 ```
@@ -233,19 +239,29 @@ An important feature of `pdomvisr()` is that it accepts an "offset" parameter th
 
 This is demonstrated with a small example below where the same sequence is plotted with and without an offset:
 
-```{r offset_example, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r offset_example, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 w_offset <- c("w_offset", 300, 200, "dom1", 210, 240)
 no_offset <- c("no_offset", 300, 0, "dom1", 210, 240)
 
 df <- data.frame(do.call("rbind", list(w_offset, no_offset)), stringsAsFactors = FALSE)
 
-pdomvisr(df)
+pdomvisr(inpdat = df)
 ```
 
 As can be seen, the only difference is that the sequence with the offset supplied starts further down along the X-axis. By default, the "sequence" corresponding to the offset length is shown. This can be disabled by setting `show_offsets = FALSE`.
 
-```{r offset_disable, echo = TRUE, fig.height = 4, fig.width = 6}
+```{r offset_disable, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
 pdomvisr(df, show_offsets = FALSE)
 ```
 
-The heights, transparencies, and fill colors for the non-feature portions of the sequences can be adjusted by the user. In addition, the number of breaks on the X-axis, legend visibility, and **usage of colorblind-friendly colors** can also be set by the user. Refer to the help page (`?pdomvisr`) for more details on these.
+The colors assigned to the features are user-configurable. Automatic allocation of **colorblind-friendly colors** is possible with `cbfcols = TRUE`. If the user wishes to specify colors manually, this can be done by passing a `character vector` of colors to `featcols`. The user must supply as many colors as there are unique features in the sequences. Features with the same name (e.g, "dom1") in different sequences are counted as towards the same feature. One way to estimate the number of colors needed would be to use `unique()` on the column containing the feature/domain names.
+
+```{r cbfcols, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
+pdomvisr(df, cbfcols = TRUE)
+```
+
+```{r featcols, echo = TRUE, fig.height = 3.6, fig.width = 6.4}
+pdomvisr(df, featcols = c("green"))
+```
+
+The heights, transparencies, and fill colors for the non-feature portions of the sequences can be adjusted by the user. In addition, the number of breaks on the X-axis, and legend visibility can also be set by the user. Refer to the help page (`?pdomvisr`) for more details on these.

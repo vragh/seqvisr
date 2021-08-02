@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">seqvisr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -69,7 +69,38 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-Enables visualization of biological sequences (and manipulation thereof) in R.
+
+<div id="seqvisr" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#seqvisr" class="anchor"></a>seqvisr</h1></div>
+
+</div>
+<div id="seqvisr-1" class="section level1">
+<h1 class="hasAnchor">
+<a href="#seqvisr-1" class="anchor"></a>seqvisr</h1>
+<p>Biological sequence visualization functions in <code>R</code>.</p>
+<p>Consists of two functions: <code><a href="reference/msavisr.html">msavisr()</a></code> and <code><a href="reference/pdomvisr.html">pdomvisr()</a></code>.</p>
+<p><code><a href="reference/msavisr.html">msavisr()</a></code> takes <code>FASTA</code>-formatted multiple sequence alignments (MSAs) as inputs and produces visualizations like the example below: <img src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png" alt="msavisr" width="60%" height="60%"></p>
+<p><code><a href="reference/pdomvisr.html">pdomvisr()</a></code> takes appropriately formatted tabular data and produces domain structure diagrams like the one below:</p>
+<p><img src="./docs/articles/seqvisr_files/figure-html/label_small-1.png" alt="pdomvisr" width="60%" height="60%"></p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>Ensure that the package <a href="https://github.com/r-lib/devtools"><code>devtools</code></a> is installed.</p>
+<p>Then execute <code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("vragh/seqvisr", build_manual = TRUE, build_vignettes = TRUE)</a></code> from within <code>R</code> to install the package. If the manual and package vignette are not necessary, <code>build_manual = TRUE, build_vignettes = TRUE</code> can be omitted.</p>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>See <code><a href="reference/seqvisr-package.html">?seqvisr</a></code>, <code><a href="reference/msavisr.html">?msavisr</a></code>, and <code><a href="reference/pdomvisr.html">?pdomvisr</a></code> (from within <code>R</code>) to access documentation and examples. Run <code><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes("seqvisr")</a></code> to access the vignette.</p>
+</div>
+<div id="license" class="section level2">
+<h2 class="hasAnchor">
+<a href="#license" class="anchor"></a>License</h2>
+<p>Released under GPL-3. A copy of the license file can be found in the file <code>LICENSE</code> (<code>LICENCE</code> is just for <code>R</code> purposes).</p>
+</div>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -97,7 +128,13 @@ Enables visualization of biological sequences (and manipulation thereof) in R.
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.com/vragh/seqvisr"><img src="https://travis-ci.com/vragh/seqvisr.svg?branch=main" alt="Build Status"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 

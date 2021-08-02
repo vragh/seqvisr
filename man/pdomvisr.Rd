@@ -4,25 +4,27 @@
 \alias{pdomvisr}
 \title{Protein domain structure visualization in R.}
 \usage{
-pdomvisr(mytsv = NULL, mypath = NULL,
+pdomvisr(inpdat = NULL, mypath = NULL,
 nbreaks = NULL, cbfcols = FALSE,
-legend = TRUE, show_offsets = TRUE, label_size = "auto",
+legend = TRUE, show_offsets = TRUE,
+label_size = "auto", featcols = NULL,
 hbase = 0.2, hfeat = 2.4*hbase, hoff = 0.8*hbase,
 alpbase = 1.0, alpfeat = 1.0, alpoff = 0.05,
 fillbase = "black", filloff = "white",
-colorbase = "black", coloroff = "gray")
+colorbase = "black", coloroff = "gray",
+nudge_x = 0.0, nudge_y = 0.5)
 }
 \arguments{
-\item{mytsv}{(character string or name of an object, mandatory) the character string may be the
+\item{inpdat}{(character string or name of an object, mandatory) the character string may be the
 name of a file or the full path to it (in which case mypath should be set to NULL). The file must
 be a table containing the information necessary to plot the domain structure diagram. Alternatively,
-mytsv can also be supplied the name of an object in R's environment (e.g., a data.frame containing
+inpdat can also be supplied the name of an object in R's environment (e.g., a data.frame containing
 the requisite data). This is useful when the input data needs to be pre-processed in R first. The
 path/filename option is more suitable when pdomvisr is being called only for plotting. In this case,
 data.table's fread() is used to read the data into the function first. Please see the 'Details' section
 for information on how the input data must be formatted.}
 
-\item{mypath}{(character string, optional) in the event that mytsv is supplied the name of a file, the
+\item{mypath}{(character string, optional) in the event that inpdat is supplied the name of a file, the
 path to where this file is located can be supplied through mypath.}
 
 \item{nbreaks}{(numeric, optional) controls the number of X-axis ticks in the plotted domain structure
@@ -43,7 +45,13 @@ when plotting partial sequences for instance (e.g., an internal fragment). (Set 
 \item{label_size}{(character or numeric, optional) controls whether the domain descriptions are displayed as
 labels on the domains. Also controls the size of the text if the labels are displayed. The size can be
 controlled by supplying a positive integer > 0. Supplying 0 prevents the labels from being displayed. Passing
-"auto" leaves the size estimation to R. Note: this does not affect the legend. (Set to "auto" by default.)}
+"auto" leaves the size estimation to R. If set to "repel", then the labels are drawn offset from the features
+and connected to them by straight lines. If set to "repel", the arguments nudge_x and nudge_y (see below) can
+be adjusted by the user to vary the positioning of the labels. Note: this argument's values do not affect the
+legend. (Set to "auto" by default.)}
+
+\item{featcols}{(character vector, optional) controls the colors assigned to the features/domains. As many
+colors as there are unique features in the data set must be supplied.}
 
 \item{hbase}{(numeric, optional) controls the height of the tiles corresponding to the non-domain portions
 of the sequence. (Set to 0.2 by default.)}
@@ -78,6 +86,14 @@ to that particular argument. (Set to "black" by default.)}
 \item{coloroff}{(character, optional) line color for the tiles representing the offset sequence. Any value
 accepted by ggplot2's "color" is accepted here, as this just passes the value on to that particular argument.
 (Set to "gray" by default.)}
+
+\item{nudge_x}{(numeric, optional) if label_size is set to "repel", adjusting this value changes the horizontal
+starting position of the label (this is the same parameter as ggrepel::geom_text_repel()'s nudge_x; so see that
+function's help page for more details).}
+
+\item{nudge_y}{(numeric, optional) if label_size is set to "repel", adjusting this value changes the vertical
+starting position of the label (this is the same parameter as ggrepel::geom_text_repel()'s nudge_y; so see that
+function's help page for more details).}
 }
 \value{
 A ggplot2 object is returned to the parent environment for plotting and/or further downstream processing/manipulation.
@@ -142,7 +158,7 @@ will still show up in the plot.
 inpath <- system.file("extdata", "pdomvisr_testdata.tsv", package = "seqvisr", mustWork = TRUE)
 
 #Default function call with colorblind-friendly colors.
-pdomvisr(mytsv = inpath, cbfcols = TRUE)
+pdomvisr(inpdat = inpath, cbfcols = TRUE)
 }
 
 }
