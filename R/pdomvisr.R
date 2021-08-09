@@ -90,7 +90,12 @@ tsvtogginp <- function(inpdf = NULL){
   #Need the sequence length as a numeric, and the sequence name to
   #start creating the output data.frame.
   slen <- as.numeric(unique(inpdf[ , 2]))
-  sname <- as.character(unique(inpdf[ , 1]))
+  #sname <- as.character(unique(inpdf[ , 1]))
+  #Do not as.character() for sname, or it will convert factors
+  #into integers. Not helpful when users are passing that kind of
+  #data in for plotting where they're already ordered things a certain
+  #way.
+  sname <- unique(inpdf[ , 1])
 
   #These steps below basically create the output data.frame
   #by taking a single-column data.frame consisting of the sequence
