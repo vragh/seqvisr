@@ -12,10 +12,12 @@ Consists of two functions: `msavisr()` and `pdomvisr()`.
 
 `msavisr()` takes `FASTA`-formatted multiple sequence alignments (MSAs)
 as inputs and produces visualizations like the example below:
+
 <img src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png" alt="msavisr" width="60%" height="60%"/>
 
 `pdomvisr()` takes appropriately formatted tabular data and produces
 domain structure diagrams like the one below:
+
 <img src="./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png" alt="pdomvisr" width="60%" height="60%"/>
 
 ## Installation
