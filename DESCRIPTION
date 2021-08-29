@@ -1,12 +1,12 @@
 Package: seqvisr
 Title: Biological Sequence Visualization Functions in R
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: person(given = "Venket",
            family = "Raghavan",
            role = c("aut", "cre"),
            email = "vraghvragh@mailfence.com")
 Description: Enables visualization of biological sequences (and manipulation thereof) in R.
-Imports: viridis, magrittr, stringr, dplyr, tidyr, ggplot2, grDevices, data.table, tibble, scales, ggrepel
+Imports: viridis, magrittr, stringr, dplyr, tidyr, ggplot2, grDevices, data.table, tibble, scales, ggrepel, rlang
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 BugReports: https://github.com/vragh/seqvisr/issues

@@ -2,7 +2,7 @@
 % Please edit documentation in R/pdomvisr.R
 \name{tsvtogginp_multi}
 \alias{tsvtogginp_multi}
-\title{Wrapper script around tsvtogginp() to perform conversion of a data.frame() of multiple sequences and their domain annotations.}
+\title{Wrapper script around tsvtogginp() to perform conversion of a data.frame() of multiple sequences and their feature annotations.}
 \usage{
 tsvtogginp_multi(inpdf = NULL)
 }
@@ -18,7 +18,7 @@ the feature; see ?pdomvisr()), and a column indicating the original positions of
 applied; see ?pdomvisr()).
 }
 \description{
-Wrapper script around tsvtogginp() to perform conversion of a data.frame() of multiple sequences and their domain annotations.
+Wrapper script around tsvtogginp() to perform conversion of a data.frame() of multiple sequences and their feature annotations.
 }
 \details{
 Basically applies tsvtogginp() on multiple sequences worth of rows using dplyr::group_map(). tsvtogginp_multi() is invoked by

@@ -5,36 +5,46 @@
 \title{Protein domain structure visualization in R.}
 \usage{
 pdomvisr(inpdat = NULL, mypath = NULL,
-nbreaks = NULL, cbfcols = FALSE,
-legend = TRUE, show_offsets = TRUE,
-label_size = "auto", featcols = NULL,
-hbase = 0.2, hfeat = 2.4*hbase, hoff = 0.8*hbase,
-alpbase = 1.0, alpfeat = 1.0, alpoff = 0.05,
-fillbase = "black", filloff = "white",
-colorbase = "black", coloroff = "gray",
+xlabel = "Position", ylabel = "Sequence",
+leglabel = "Features", nbreaks = NULL,
+hide_y_axis = FALSE, legend = TRUE,
+show_offsets = TRUE, label_size = "auto",
+hbase = 0.2, hoff = 0.8*hbase, alpbase = 1.0,
+alpfeat = 1.0, alpoff = 0.05,
+fillbase = "gray80", filloff = "gray60",
+colorbase = "gray80", coloroff = "gray60",
 nudge_x = 0.0, nudge_y = 0.5)
 }
 \arguments{
 \item{inpdat}{(character string or name of an object, mandatory) the character string may be the
 name of a file or the full path to it (in which case mypath should be set to NULL). The file must
-be a table containing the information necessary to plot the domain structure diagram. Alternatively,
+be a table containing the information necessary to plot the domain/feature structure diagram. Alternatively,
 inpdat can also be supplied the name of an object in R's environment (e.g., a data.frame containing
 the requisite data). This is useful when the input data needs to be pre-processed in R first. The
-path/filename option is more suitable when pdomvisr is being called only for plotting. In this case,
+path/filename option is more suitable when pdomvisr() is being called only for plotting. In this case,
 data.table's fread() is used to read the data into the function first. Please see the 'Details' section
 for information on how the input data must be formatted.}
 
 \item{mypath}{(character string, optional) in the event that inpdat is supplied the name of a file, the
 path to where this file is located can be supplied through mypath.}
 
+\item{xlabel}{(character string, optional) sets the label for the X-axis. Set to "" to disable. (Set to
+"Position" by default.)}
+
+\item{ylabel}{(character string, optional) sets the label for the Y-axis. Set to "" to disable. (Set to
+"Sequence" by default.)}
+
+\item{leglabel}{(character string, optional) sets the label for the legend. Set to "" to disable. (Set to
+"Features" by default.)}
+
 \item{nbreaks}{(numeric, optional) controls the number of X-axis ticks in the plotted domain structure
 diagram. If the user does not supply a number, this is automatically calculated to produce a tick every
 100 residues (based on the length of the longest sequence included in the plot).}
 
-\item{cbfcols}{(boolean, optional) controls whether colorblind-friendly colors will be used for the
-domains. (Set to FALSE by default.)}
+\item{hide_y_axis}{(boolean, optional) controls whether the Y-axis grid line and ticks must be visible or
+not. (Set to TRUE by default.)}
 
-\item{legend}{(boolean, optional) controls whether the legend associating the domain colors to the domain
+\item{legend}{(boolean, optional) controls whether the legend associating the feature colors to the feature
 descriptions should be plotted along with the main plot. (Set to TRUE by default.)}
 
 \item{show_offsets}{(boolean, optional) controls whether sequence offsets should be plotted or hidden.
@@ -42,36 +52,30 @@ A sequence offset is a whole number (supplied as a part of the input table) indi
 the actual first residue of the sequence the first residue indicated in the input data is. This is relevant
 when plotting partial sequences for instance (e.g., an internal fragment). (Set to TRUE by default.)}
 
-\item{label_size}{(character or numeric, optional) controls whether the domain descriptions are displayed as
-labels on the domains. Also controls the size of the text if the labels are displayed. The size can be
+\item{label_size}{(character or numeric, optional) controls whether the feature descriptions are displayed as
+labels on the features. Also controls the size of the text if the labels are displayed. The size can be
 controlled by supplying a positive integer > 0. Supplying 0 prevents the labels from being displayed. Passing
 "auto" leaves the size estimation to R. If set to "repel", then the labels are drawn offset from the features
 and connected to them by straight lines. If set to "repel", the arguments nudge_x and nudge_y (see below) can
 be adjusted by the user to vary the positioning of the labels. Note: this argument's values do not affect the
 legend. (Set to "auto" by default.)}
 
-\item{featcols}{(character vector, optional) controls the colors assigned to the features/domains. As many
-colors as there are unique features in the data set must be supplied.}
-
-\item{hbase}{(numeric, optional) controls the height of the tiles corresponding to the non-domain portions
+\item{hbase}{(numeric, optional) controls the height of the tiles corresponding to the non-feature portions
 of the sequence. (Set to 0.2 by default.)}
-
-\item{hfeat}{(numeric, optional) controls the height of the tiles corresponding to the DOMAIN portions of the
-sequence. Under default settings, this scales automatically with hbase. (Set to 2.4 * hbase by default.)}
 
 \item{hoff}{(numeric, optional) controls the height of the tiles representing the sequence offset. Under
 default settings, this scales automatically with hbase. (Set to 0.8 * hbase by default.)}
 
-\item{alpbase}{(numeric, optional) controls the alpha level of the tiles representing the non-domain portions
+\item{alpbase}{(numeric, optional) controls the alpha level of the tiles representing the non-feature portions
 of the sequence. (Set to 1.0 by default.)}
 
-\item{alpfeat}{(numeric, optional) controls the alpha level of the tiles representing the DOMAIN portions of
+\item{alpfeat}{(numeric, optional) controls the alpha level of the tiles representing the features of
 the sequence(s). (Set to 1.0 by default.)}
 
 \item{alpoff}{(numeric, optional) controls the alpha level of the tiles representing the sequence offset. (Set
 to 0.05 by default.)}
 
-\item{fillbase}{(character, optional) fill color for the tiles representing the non-domain portions of the
+\item{fillbase}{(character, optional) fill color for the tiles representing the non-feature portions of the
 sequence. Any value accepted by ggplot2's "fill" is accepted here, as this just passes the value on
 to that particular argument. (Set to "black" by default.)}
 
@@ -79,7 +83,7 @@ to that particular argument. (Set to "black" by default.)}
 accepted by ggplot2's "fill" is accepted here, as this just passes the value on to that particular argument.
 (Set to "white" by default.)}
 
-\item{colorbase}{(character, optional) line color for the tiles representing the non-domain portions of the
+\item{colorbase}{(character, optional) line color for the tiles representing the non-feature portions of the
 sequence. Any value accepted by ggplot2's "color" is accepted here, as this just passes the value on
 to that particular argument. (Set to "black" by default.)}
 
@@ -99,28 +103,24 @@ function's help page for more details).}
 A ggplot2 object is returned to the parent environment for plotting and/or further downstream processing/manipulation.
 }
 \description{
-pdomvisr() is a simple function to plot a diagram of the domain structure of one or more
+pdomvisr() is a simple function to plot a diagram of the domain/feature structure of one or more
 sequences. pdomvisr() uses ggplot2::ggplot() internally. The only mandatory input is a table
 with the following information (in this particular order): sequence name, sequence length,
-sequence offset, domain description, domain start coordinate, domain end coordinate.
+sequence offset, feature height, feature color, feature description, feature start coordinate,
+feature end coordinate.
 }
 \details{
-pdomvisr() plots a domain structure diagram given the coordinates of domains in one or more sequences.
+pdomvisr() plots a domain/feature structure diagram given the coordinates of features in one or more sequences.
 
 The only mandatory input is a table with the following information (in this particular order): sequence name,
-sequence length, sequence offset, domain description, domain start coordinate, domain end coordinate. Most column
-names are self-explanatory, and should be readily produced by most domain annotation tools (or should be producible
-by hand). The only column that will have to be created by the user is the sequence offset column. This is a special
-feature that is strictly optional. The objective of this column is to indicate how far away from the actual start
-of the sequence the "indicated" start of the sequence is. For example, if a sequence is listed as being 200 residues
-long, and has an offset value of 10, this implies that the sequence is actually 210 residues long, but only the last
-200 residues "exist". The offset column is useful for visually demonstrating that a sequence is partial. If none of
-the sequences are partial and/or in no need of an offset, the values in this column should be set to 0. It is mandatory
-that this column exists (with a default value of 0 in all rows) even if it is not in use!!
+sequence length, sequence offset, feature height, feature color, feature description, feature start coordinate,
+feature end coordinate. Most column names are self-explanatory, and should be readily produced by most feature
+annotation tools (or should be producible by hand). The sequence offset, feature height, and feature color columns
+must be typically defined by the user (no annotation tool produces these). (More on these columns later.)
 
-Each row in the input table should correspond to the coordinates for a particular domain in a particular sequence.
-Therefore, if a sequence contains more than one domain, it will have to be represented by as many rows as there are
-domains in it. The sequence name, sequence length, and sequence offset columns will (unfortunately) have to be repeated
+Each row in the input table should correspond to the coordinates for a particular feature in a particular sequence.
+Therefore, if a sequence contains more than one feature, it will have to be represented by as many rows as there are
+features in it. The sequence name, sequence length, and sequence offset columns will (unfortunately) have to be repeated
 in all such rows, despite being redundant in this manner.
 
 The input data can be any tabular file that data.table's fread() can parse. Alternatively, the user can also supply
@@ -136,20 +136,39 @@ geom_tile() to render each position in the sequence as its own tile. pdomvisr() 
 (tsvtogginp_multi()) to transform the input data into a "long" style data.frame consisting of one row per position
 per sequence. Each position is identified as belonging to one of three (ggplot2) layers: offset, base, or feature.
 The offset layer, as the name suggests, represents all positions that form the "offset sequence". The base layer
-includes all positions that are neither a part of the offset sequence nor a part of a domain in the sequence. The
-domain layer includes all residues that belong to a domain. Additional columns exist to indicate labeling (and other
-logistics) for the domains. As there is no upper or lower bound on the length of a domain as far as pdomvisr() is
+includes all positions that are neither a part of the offset sequence nor a part of a feature in the sequence. The
+feature layer includes all residues that belong to a feature. Additional columns exist to indicate labeling (and other
+logistics) for the features. As there is no upper or lower bound on the length of a feature as far as pdomvisr() is
 concerned, even single residues (e.g., an active site) can be annotated by adding a row carrying the same value for the
-start and end positions for the "domain".
+start and end positions for the "feature".
 
 pdomvisr() plots the diagram on the current device (the plot pane in RStudio, for example) and also returns the ggplot2
 object itself to the parent environment from which the function was called. The user therefore has complete control over
 the output.
+
+About the user defined columns:
+
+#' The offset column is strictly optional. The objective of this column is to indicate how far away from the actual start
+of the sequence the "indicated" start of the sequence is. For example, if a sequence is listed as being 200 residues long,
+and has an offset value of 10, this implies that the sequence is actually 210 residues long, but only the last 200 residues
+"exist". The offset column is useful for visually demonstrating that a sequence is partial. If none of the sequences are
+partial and/or in no need of an offset, the values in this column should be set to 0. It is mandatory that this column exists
+(with a default value of 0 in all rows) even if it is not in use!!
+
+The feature height column is mandatory and must be numeric. It defines the height of the tiles corresponding to a particular feature.
+Unless the non-feature portions of the sequences have been assigned heights greater than 1.0, this column need not contain values greater
+than 1.0 either (a value of 0.4 should suffice). Each unique feature, can of course be assigned its own height value. pdomvisr() permits
+inclusion of "dummy" rows where only the sequence identifier, sequence length (and optionally, offset) are set; these rows are to visually
+represent sequences with no domains in them. For such cases, the height should be set to 0. Finally, there is no reason that different domains
+cannot have different heights, and therefore every row in the input data.frame can have a different height assigned to it.
+
+The feature color column is analogous to the feature height column, but assigns the colors for the tiles instead. Everything discussed above
+also applies for this column. For "dummy" rows, the feature color must be set to NA.
 }
 \note{
-In some cases it may be necessary to include a sequence that has no annotated domains. Most domain annotation tools would
+In some cases it may be necessary to include a sequence that has no annotated features. Most feature annotation tools would
 not include a row for such sequences. But as long as the user adds a row to the input table manually with the sequence
-description column set to NA, and the start and end positions of the domain set to 0, a sequence with no annotated domains
+description column set to NA, and the start and end positions of the feature set to 0, a sequence with no annotated features
 will still show up in the plot.
 }
 \examples{

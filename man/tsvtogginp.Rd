@@ -13,21 +13,22 @@ tsvtogginp(inpdf = NULL)
 a data.frame() with one row per residue indicating the sequence name, position (indicated by that row), the description
 associated with that position (e.g., "ABC domain", or NA for no description), a column indicating which feature the position
 belongs to (e.g., say there are two domains named "ABC", this numerical column is a way to distinguish between them), a column
-indicating the layer (offset, base, feature; see ?pdomvisr()), label for the particular feature (assigned to one position within
-the feature; see ?pdomvisr()), and a column indicating the original positions of the rows (e.g., when a sequence offset has been
-applied; see ?pdomvisr()).
+indicating the layer (offset, base, feature; see ?pdomvisr()), a numerical column indicating the height for the feature's tiles,
+an alphanumeric column indicating the colors assigned to the item's tiles, labels for the particular feature (assigned to one
+position within the feature; see ?pdomvisr()), and a column indicating the original positions of the rows (e.g., when a sequence
+offset has been applied; see ?pdomvisr()). Column names are: prot_acc, pos, posdesc, fset, layer, height, color, label, orig_pos.
 }
 \description{
 Convert a single sequence's quasi-standard TSV "row" input data.frame format to a position-per-row ggplot()-friendly format.
 }
 \details{
-Function to take a data.frame() indicating the sequence name, length, sequence start offset, and domains' start and end
-positions (one row for each domain), FOR ONE SEQUENCE, and convert this into (another) data.frame that can be parsed by
-ggplot2. Namely, the output data.frame has one row for each residue in the sequence, and indicates the positions (important
-for ggplot2), and the associated annotation (e.g., "ABC domain"). The function also has additional columns indicating data
-for labeling that should be visualized on the plot or used to create it--this is basically done by taking the domain's name
-and assigning it to a label column but only for a single residue at the middle of the domain. (If the labels of all residues
-from each domain are displayed, the labeling will be illegible.)
+Function to take a data.frame() indicating the sequence name, length, sequence start offset, feature height, feature color,
+and feature start and end positions (one row for each feature), FOR ONE SEQUENCE, and convert this into (another) data.frame
+that can be parsed by ggplot2. Namely, the output data.frame has one row for each residue in the sequence, and indicates the
+positions (important for ggplot2), and the associated annotation (e.g., "ABC domain"). The function also has additional columns
+indicating data for labeling that should be visualized on the plot or used to create it--this is basically done by taking the
+feature's name and assigning it to a label column but only for a single residue at the middle of the feature. (If the labels of
+all residues from each feature are displayed, the labeling will be illegible.)
 
 tsvtogginp() is invoked by pdomvisr() through the wrapper script tsvtgginp_multi().
 }

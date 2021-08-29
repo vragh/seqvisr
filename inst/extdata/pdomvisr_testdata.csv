@@ -1,0 +1,9 @@
+"prot_acc","seq_len","seq_offset","feature_height","feature_color","signature_desc","start_loc","stop_loc"
+"Seq1",579,0,0.4,"blue","dom1",308,407
+"Seq1",579,0,0.4,"#01d276","dom2",133,184
+"Seq2",855,0,0.4,"blue","dom1",275,373
+"Seq2",855,0,0.4,"#01d276","dom2",118,216
+"Seq3",855,0,0.4,"#ff2735","dom22",29,89
+"Seq4",1197,0,0,"NA","NA",0,0
+"Seq5",325,100,0.4,"#b89200","dom11",254,313
+"Seq5",325,100,0.2,"yellow","resi1",280,280
