@@ -529,6 +529,12 @@ tsvtogginp_multi <- function(inpdf = NULL){
 #' description column set to NA, and the start and end positions of the feature set to 0, a sequence with no annotated features
 #' will still show up in the plot.
 #'
+#' @note
+#' Technically speaking, the only mandatory input is the output from seqvisr::tsvtogginp_multi(). pdomvisr()
+#' can check whether this is the case and skip this step if the user has performed it manually. This ensures that
+#' the user can fully customize the input to pdomvisr. E.g., the user wishes to have different labels for the legend
+#' and the in-sequence annotation.
+#'
 #' @examples
 #' \dontrun{
 #' #Input data
@@ -595,9 +601,17 @@ pdomvisr <- function(inpdat = NULL, mypath = NULL,
     inpdf <- data.table::fread(inpdat)
   }
 
+  #Check if inpdf is actually a data.frame from seqvisr::tsvtogginp_multi()
+  stdnames <- c("prot_acc", "pos", "posdesc", "fset", "layer",
+                "height", "colorfill", "label", "orig_pos")
+  if(base::ncol(inpdf) == base::length(stdnames) && base::all(names(inpdf) == stdnames)){
+    #Do nothing. The data has already been processed by tsvtogginp_multi externally.
+  } else{
+    #Converting data for plotting with tsvtogginp_multi.
+    inpdf <- tsvtogginp_multi(inpdf)
+  }
+  rm(stdnames)
 
-  #Converting data for plotting with tsvtogginp_multi.
-  inpdf <- tsvtogginp_multi(inpdf)
 
 
 
