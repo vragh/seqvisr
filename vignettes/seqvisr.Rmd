@@ -172,6 +172,8 @@ Likewise the `feature_height` and `feature_color` columns are specific to `pdomv
 
 This tabular format is the standard (and only accepted) input format for `pdomvisr()`. `pdomvisr()` can be provided a name of (or path to) a file that contains the data formatted in this manner. Alternatively, if the data has already been loaded into the `R` environment, the function can simply be passed this `data.frame`/`data.table`/`tibble`'s name. In any case, given this input data, `pdomvisr()` will then draw domain structure.
 
+Note: technically speaking, all `pdomvisr()` actually cares about is that the input has been processed by `seqvisr::tsvtogginp_multi()`. It can automatically check if this is the case. So the user can call `seqvisr::tsvtogginp_multi()` separately, post-process it, and then pass that to `pdomvisr()`. This is to provide the end user full control over the plot inputs. For instance, this way, the user can assign different (but corresponding) values for the feature legend labels and the in-sequence feature labels.
+
 Here is `pdomvisr()` in action.
 
 ```{r, pdomvisr, echo = TRUE, fig.height = 3.6, fig.width = 6.4}

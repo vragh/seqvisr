@@ -170,6 +170,11 @@ In some cases it may be necessary to include a sequence that has no annotated fe
 not include a row for such sequences. But as long as the user adds a row to the input table manually with the sequence
 description column set to NA, and the start and end positions of the feature set to 0, a sequence with no annotated features
 will still show up in the plot.
+
+Technically speaking, the only mandatory input is the output from seqvisr::tsvtogginp_multi(). pdomvisr()
+can check whether this is the case and skip this step if the user has performed it manually. This ensures that
+the user can fully customize the input to pdomvisr. E.g., the user wishes to have different labels for the legend
+and the in-sequence annotation.
 }
 \examples{
 \dontrun{

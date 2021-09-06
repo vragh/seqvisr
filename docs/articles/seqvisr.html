@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seqvisr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
       </span>
     </div>
 
@@ -188,6 +188,7 @@
 <p>The <code>sequence_offset</code> column is something that needs to be manually added: it is specific to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>, and allows for appropriate placement of partial sequences (especially with reference to other sequences). This is useful, for instance, when only an internal fragment of a protein sequence is being plotted. <strong>For most use cases, the <code>sequence_offset</code> column values can be set to 0</strong>.</p>
 <p>Likewise the <code>feature_height</code> and <code>feature_color</code> columns are specific to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. As the names suggest these set the height and color of the features respectively. The advantage of this approach is that the user has full control over which features are prominently features, and which ones recede into the background. This also ensures that overlapping features can be represented faithfully. For instance, presume there is a residue of interest that must be highlighted within a domain. In this case, the residue can be passed as its own row in this input table, with a height and color different to that of the domain, ensuring that both features show up in the visualization.</p>
 <p>This tabular format is the standard (and only accepted) input format for <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> can be provided a name of (or path to) a file that contains the data formatted in this manner. Alternatively, if the data has already been loaded into the <code>R</code> environment, the function can simply be passed this <code>data.frame</code>/<code>data.table</code>/<code>tibble</code>’s name. In any case, given this input data, <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> will then draw domain structure.</p>
+<p>Note: technically speaking, all <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> actually cares about is that the input has been processed by <code><a href="../reference/tsvtogginp_multi.html">seqvisr::tsvtogginp_multi()</a></code>. It can automatically check if this is the case. So the user can call <code><a href="../reference/tsvtogginp_multi.html">seqvisr::tsvtogginp_multi()</a></code> separately, post-process it, and then pass that to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. This is to provide the end user full control over the plot inputs. For instance, this way, the user can assign different (but corresponding) values for the feature legend labels and the in-sequence feature labels.</p>
 <p>Here is <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> in action.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Loading some sample data.</span>
