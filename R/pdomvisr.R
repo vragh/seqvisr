@@ -643,6 +643,11 @@ pdomvisr <- function(inpdat = NULL, mypath = NULL,
   if(is.null(nbreaks)){
     nbreaks <- base::round(base::max(inpdf$pos)/100)
   }
+  #Based on this https://stackoverflow.com/a/51019485/9494044
+  #Pretty breaks will start with 0.
+  pretty_br <- base::pretty(inpdf$pos, n = nbreaks)
+  #So setting first break to 1 manually.
+  pretty_br[1] <- 1
 
 
 
@@ -669,7 +674,8 @@ pdomvisr <- function(inpdat = NULL, mypath = NULL,
       ggplot2::geom_tile(data = lfeat,
                          ggplot2::aes(x = .data$pos, y = .data$prot_acc, fill = .data$posdesc, height = as.numeric(.data$height)),
                          alpha = alpfeat) +
-      ggplot2::scale_x_continuous(breaks = scales::pretty_breaks(n = nbreaks)) +
+      #ggplot2::scale_x_continuous(limits = c(1, NA), breaks = scales::extended_breaks(n = nbreaks)) +
+      ggplot2::scale_x_continuous(breaks = pretty_br) +
       ggplot2::theme_classic() +
       ggplot2::labs(x = xlabel, y = ylabel, fill = "Features")
 
@@ -707,7 +713,8 @@ pdomvisr <- function(inpdat = NULL, mypath = NULL,
     myplt <- ggplot2::ggplot() +
       ggplot2::geom_tile(data = lbase, ggplot2::aes(x = .data$pos, y = .data$prot_acc, fill = .data$posdesc, height = as.numeric(hbase)),
                          alpha = alpbase, fill = fillbase, color = colorbase) +
-      ggplot2::scale_x_continuous(breaks = scales::pretty_breaks(n = nbreaks)) +
+      #ggplot2::scale_x_continuous(limits = c(1, NA), breaks = scales::extended_breaks(n = nbreaks)) +
+      ggplot2::scale_x_continuous(breaks = pretty_br) +
       ggplot2::theme_classic() +
       ggplot2::labs(x = "Position", y = "Sequence", fill = "Features")
 
@@ -781,5 +788,3 @@ pdomvisr <- function(inpdat = NULL, mypath = NULL,
   return(myplt)
 
 }
-
-
