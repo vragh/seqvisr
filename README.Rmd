@@ -3,7 +3,7 @@ title: "seqvisr"
 output: github_document
 ---
 
-[![Build Status](https://travis-ci.com/vragh/seqvisr.svg?branch=main)](https://travis-ci.com/vragh/seqvisr)
+[![Build Status](https://app.travis-ci.com/vragh/seqvisr.svg?branch=main)](https://app.travis-ci.com/vragh/seqvisr)
 
 # seqvisr
 Biological sequence visualization functions in `R`.

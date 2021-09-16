@@ -2,7 +2,7 @@ seqvisr
 ================
 
 [![Build
-Status](https://travis-ci.com/vragh/seqvisr.svg?branch=main)](https://travis-ci.com/vragh/seqvisr)
+Status](https://app.travis-ci.com/vragh/seqvisr.svg?branch=main)](https://app.travis-ci.com/vragh/seqvisr)
 
 # seqvisr
 
