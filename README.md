@@ -1,8 +1,9 @@
 seqvisr
 ================
 
-[![Build
-Status](https://app.travis-ci.com/vragh/seqvisr.svg?branch=main)](https://app.travis-ci.com/vragh/seqvisr)
+[![Build Status](https://app.travis-ci.com/vragh/seqvisr.svg?branch=main)](https://app.travis-ci.com/vragh/seqvisr)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6583981.svg)](https://doi.org/10.5281/zenodo.6583981)
 
 # seqvisr
 
@@ -36,6 +37,9 @@ vignette are not necessary,
 See `?seqvisr`, `?msavisr`, and `?pdomvisr` (from within `R`) to access
 documentation and examples. Run `browseVignettes("seqvisr")` to access
 the vignette.
+
+## Citation
+Please cite `seqvisr` using [https://doi.org/10.5281/zenodo.6583981](https://doi.org/10.5281/zenodo.6583981).
 
 ## License
 
