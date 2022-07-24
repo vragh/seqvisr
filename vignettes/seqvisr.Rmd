@@ -26,16 +26,17 @@ Than like so:
 
 `seqvisr` is an attempt to bring such functionality to `R` whereby sequences can be visualized in `R` natively without having to resort to external tools.
 
-In specific, `seqvisr` offers two functions (at the moment):
+In specific, `seqvisr` offers two functions (at the moment) for visualization:
 
 * `msavisr()` for visualizing multiple sequence alignments (MSAs).
 
 * `pdomvisr()` for visualizing amino acid/protein sequences.
 
+Additionally, as of `v0.2.6`, `seqvisr` also offers `cdsearchr()`, an `R` based interface to the NCBI CD-SEARCH web server. This facilitates easy annotation of protein sequence data with the results being conveniently retrieved into `R` as a `data.frame`.
 
 ## Installation
 
-As of version `0.2.0`, `seqvisr` is only available via `GitHub` (<https://github.com/vragh/seqvisr>). Please ensure that the `devtools` package has been installed already (`install.packages("devtools")`). `seqvisr` can be installed as follows:
+As of version `0.2.6`, `seqvisr` is only available via `GitHub` (<https://github.com/vragh/seqvisr>). Please ensure that the `devtools` package has been installed already (`install.packages("devtools")`). `seqvisr` can be installed as follows:
 
 `devtools::install_github("vragh/seqvisr")`
 
@@ -143,8 +144,6 @@ msavisr(mymsa = testmsa, myref = "Ref0", myroi = list(roi1), hroi = 0.8, roicolo
 Finally, the function is sequence alphabet agnostic. So it will work with both amino acid and nucleotide sequences. However, its capability to handle amino acid mismatches is only very basic at the moment. For instance, it cannot recognize conservative substitutions, and will color all mismatches with the same color.
 
 Please see `?msavisr` for more information on this function.
-
-
 
 ## Protein domain visualization with `pdomvisr()`
 
@@ -294,3 +293,21 @@ This, therefore permits the visualization of complex annotation data like the on
 pdomvisr(annotdat, label_size = "repel", hide_y_axis = TRUE, ylabel = "", xlabel = "")
 ```
 
+
+## Easy protein annotations using `cdsearchr()`
+
+As `pdomvisr()` can easily visualize sequence annotations, `seqvisr` now includes a native function (`cdsearchr()`) to submit sequences to NCBI's CD-SEARCH API (<https://www.ncbi.nlm.nih.gov/Structure/cdd/wrpsb.cgi>), and retrieve the results as a `data.frame`. (Of course, it need not be used in conjunction with `pdomvisr()`, and this aspect is still a work in progress as of `v0.2.6`.)
+
+`cdsearchr()` is easy to use, and requires only a single, mandatory input from the user: a `FASTA` file containing the protein sequences to be annotated. All standard CD-SEARCH parameters (see <https://www.ncbi.nlm.nih.gov/Structure/cdd/cdd_help.shtml#BatchRPSBWebAPI_parameters>) are also exposed by `cdsearchr()` should the user wish to adjust the search parameters (but this is not necessary).
+
+Invocation is easy, and as follows:
+```{r}
+#Loading example data.
+inpath <- system.file("extdata", "cdsearchr_testdata.fasta", package = "seqvisr", mustWork = TRUE)
+#Obtaining annotations.
+df <- cdsearchr(queries = inpath, check_wait = 2)
+#Sample output of annotations
+df
+```
+
+Users should note that `cdsearchr` respects the 4000 sequence submission limit that the CD-SEARCH server imposes. So for query sets with > 4000 sequences, please chunk the data accordingly beforehand (e.g., into subsets of 2000 sequences each). Further, although default values have been supplied for `check_max` and `check_wait` -- how many times the CD-SEARCH server has to be queried, and how often (in seconds), respectively -- it is best to adjust these based on the size of the input data. It is recommended to set larger values for both for bigger datasets and vice versa.
