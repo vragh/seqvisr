@@ -4,9 +4,9 @@
 \name{seqvisr-package}
 \alias{seqvisr}
 \alias{seqvisr-package}
-\title{seqvisr: Biological Sequence Visualization Functions in R}
+\title{seqvisr: Biological Sequence Visualization and Auxiliary Functions in R}
 \description{
-Enables visualization of biological sequences (and manipulation thereof) in R.
+Enables visualization of biological sequences (and manipulation thereof, among other things) in R.
 }
 \details{
 R functions for visualization of biological sequences.

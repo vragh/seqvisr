@@ -1,32 +1,58 @@
 seqvisr
 ================
 
-[![Build Status](https://app.travis-ci.com/vragh/seqvisr.svg?branch=main)](https://app.travis-ci.com/vragh/seqvisr)
+[![Build
+Status](https://app.travis-ci.com/vragh/seqvisr.svg?branch=main)](https://app.travis-ci.com/vragh/seqvisr)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6583981.svg)](https://doi.org/10.5281/zenodo.6583981)
 
 # seqvisr
 
-Biological sequence visualization functions in `R`.
+Biological sequence visualization and auxiliary functions in `R`.
 
-Consists of two functions: `msavisr()` and `pdomvisr()`.
+Consists of two main visualization functions: `msavisr()` and
+`pdomvisr()`.
 
 `msavisr()` takes `FASTA`-formatted multiple sequence alignments (MSAs)
 as inputs and produces visualizations like the example below:
 
-<img src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png" alt="msavisr" width="60%" height="60%"/>
+<!-- <img src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png" alt="msavisr" width="60%" height="60%"/> -->
+
+<figure>
+<img
+src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png"
+style="width:60.0%;height:60.0%" alt="msavisr" />
+<figcaption aria-hidden="true">msavisr</figcaption>
+</figure>
 
 `pdomvisr()` takes appropriately formatted tabular data and produces
 domain structure diagrams like the one below:
 
-<img src="./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png" alt="pdomvisr" width="60%" height="60%"/>
+<!-- <img src="./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png" alt="pdomvisr" width="60%" height="60%"/> -->
+
+<figure>
+<img src="./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png"
+style="width:60.0%;height:60.0%" alt="pdomvisr" />
+<figcaption aria-hidden="true">pdomvisr</figcaption>
+</figure>
+
+*NEW* as of `v0.2.6`: `cdsearchr()` now enables users to submit protein
+sequence sets to the NCBI CD-SEARCH server and retrieve annotations as a
+`data.frame` automatically. Example output below:
+
+<!-- <img src="./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png" alt="cdsearchr" width="60%" height="60%"/> -->
+
+<figure>
+<img
+src="./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png"
+style="width:60.0%;height:60.0%" alt="cdsearchr" />
+<figcaption aria-hidden="true">cdsearchr</figcaption>
+</figure>
 
 ## Installation
 
-Ensure that the package [`devtools`](https://github.com/r-lib/devtools)
-is installed.
-
-Then execute
+Ensure that [`devtools`](https://github.com/r-lib/devtools) is
+installed. Then execute
 `devtools::install_github("vragh/seqvisr", build_manual = TRUE, build_vignettes = TRUE)`
 from within `R` to install the package. If the manual and package
 vignette are not necessary,
@@ -34,12 +60,13 @@ vignette are not necessary,
 
 ## Usage
 
-See `?seqvisr`, `?msavisr`, and `?pdomvisr` (from within `R`) to access
-documentation and examples. Run `browseVignettes("seqvisr")` to access
-the vignette.
+See `?seqvisr`, `?msavisr`, `?pdomvisr`, and `?cdsearchr` (from within
+`R`) to access documentation and examples. Run
+`browseVignettes("seqvisr")` to access the vignette.
 
 ## Citation
-Please cite `seqvisr` using [https://doi.org/10.5281/zenodo.6583981](https://doi.org/10.5281/zenodo.6583981).
+
+Please cite `seqvisr` using <https://doi.org/10.5281/zenodo.6583981>.
 
 ## License
 

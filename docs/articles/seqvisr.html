@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seqvisr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.6</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/seqvisr.html">Get started</a>
 </li>
@@ -52,7 +48,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/vragh/seqvisr/">
+  <a href="https://github.com/vragh/seqvisr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -67,226 +63,448 @@
 
       
 
-      </header><script src="seqvisr_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>seqvisr</h1>
-                        <h4 class="author">Venket Raghavan</h4>
+                        <h4 data-toc-skip class="author">Venket
+Raghavan</h4>
             
-            <h4 class="date">29.08.2021</h4>
+            <h4 data-toc-skip class="date">29.08.2021</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/vragh/seqvisr/blob/master/vignettes/seqvisr.Rmd"><code>vignettes/seqvisr.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/vragh/seqvisr/blob/HEAD/vignettes/seqvisr.Rmd" class="external-link"><code>vignettes/seqvisr.Rmd</code></a></small>
       <div class="hidden name"><code>seqvisr.Rmd</code></div>
 
     </div>
 
     
     
-<div id="what-is-seqvisr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-is-seqvisr" class="anchor"></a>What is <code>seqvisr</code>?</h2>
-<p>Visualizing biological sequence data is a common use-case in bioinformatics, computational biology, and biology as a whole. “Visualization” is often in the form of a cartoon/diagram that captures the relevant higher-level information while abstracting away the sequence itself. For instance: a protein sequence is (in some senses) much more comprehensible like so:</p>
+<div class="section level2">
+<h2 id="what-is-seqvisr">What is <code>seqvisr</code>?<a class="anchor" aria-label="anchor" href="#what-is-seqvisr"></a>
+</h2>
+<p>Visualizing biological sequence data is a common use-case in
+bioinformatics, computational biology, and biology as a whole.
+“Visualization” is often in the form of a cartoon/diagram that captures
+the relevant higher-level information while abstracting away the
+sequence itself. For instance: a protein sequence is (in some senses)
+much more comprehensible like so:</p>
 <p><code>------[DOMAIN1]------[DOMAIN2]------</code></p>
 <p>Than like so:</p>
 <p><code>MEVPTMSFGECAPSDRGDRFHWMPFDSTGGCVLPDD</code></p>
-<p><code>seqvisr</code> is an attempt to bring such functionality to <code>R</code> whereby sequences can be visualized in <code>R</code> natively without having to resort to external tools.</p>
-<p>In specific, <code>seqvisr</code> offers two functions (at the moment):</p>
+<p><code>seqvisr</code> is an attempt to bring such functionality to
+<code>R</code> whereby sequences can be visualized in <code>R</code>
+natively without having to resort to external tools.</p>
+<p>In specific, <code>seqvisr</code> offers two functions (at the
+moment) for visualization:</p>
 <ul>
-<li><p><code><a href="../reference/msavisr.html">msavisr()</a></code> for visualizing multiple sequence alignments (MSAs).</p></li>
-<li><p><code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> for visualizing amino acid/protein sequences.</p></li>
+<li><p><code><a href="../reference/msavisr.html">msavisr()</a></code> for visualizing multiple sequence
+alignments (MSAs).</p></li>
+<li><p><code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> for visualizing amino acid/protein
+sequences.</p></li>
 </ul>
+<p>Additionally, as of <code>v0.2.6</code>, <code>seqvisr</code> also
+offers <code><a href="../reference/cdsearchr.html">cdsearchr()</a></code>, an <code>R</code> based interface to
+the NCBI CD-SEARCH web server. This facilitates easy annotation of
+protein sequence data with the results being conveniently retrieved into
+<code>R</code> as a <code>data.frame</code>.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>As of version <code>0.2.0</code>, <code>seqvisr</code> is only available via <code>GitHub</code> (<a href="https://github.com/vragh/seqvisr" class="uri">https://github.com/vragh/seqvisr</a>). Please ensure that the <code>devtools</code> package has been installed already (<code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("devtools")</a></code>). <code>seqvisr</code> can be installed as follows:</p>
-<p><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("vragh/seqvisr")</a></code></p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>As of version <code>0.2.6</code>, <code>seqvisr</code> is only
+available via <code>GitHub</code> (<a href="https://github.com/vragh/seqvisr" class="external-link uri">https://github.com/vragh/seqvisr</a>). Please ensure that
+the <code>devtools</code> package has been installed already
+(<code>install.packages("devtools")</code>). <code>seqvisr</code> can be
+installed as follows:</p>
+<p><code>devtools::install_github("vragh/seqvisr")</code></p>
 <p>Then load the package for use like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/vragh/seqvisr">"seqvisr"</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/vragh/seqvisr" class="external-link">"seqvisr"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="multiple-sequence-alignment-msa-visualization-with-msavisr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#multiple-sequence-alignment-msa-visualization-with-msavisr" class="anchor"></a>Multiple sequence alignment (MSA) visualization with <code>msavisr()</code>
+<div class="section level2">
+<h2 id="multiple-sequence-alignment-msa-visualization-with-msavisr">Multiple sequence alignment (MSA) visualization with
+<code>msavisr()</code><a class="anchor" aria-label="anchor" href="#multiple-sequence-alignment-msa-visualization-with-msavisr"></a>
 </h2>
-<p>A sequence alignment is a relative arrangement of two sequences such that identical/similar character in either sequence are aligned to each other. An MSA is an extension of this concept to more than two sequences (see <a href="https://en.wikipedia.org/wiki/Multiple_sequence_alignment" class="uri">https://en.wikipedia.org/wiki/Multiple_sequence_alignment</a> for an introduction). MSAs are informative with regards to evolutionary, structural, and functional conservation of DNA and proteins. A typical MSA might look something like this:</p>
+<p>A sequence alignment is a relative arrangement of two sequences such
+that identical/similar character in either sequence are aligned to each
+other. An MSA is an extension of this concept to more than two sequences
+(see <a href="https://en.wikipedia.org/wiki/Multiple_sequence_alignment" class="external-link uri">https://en.wikipedia.org/wiki/Multiple_sequence_alignment</a>
+for an introduction). MSAs are informative with regards to evolutionary,
+structural, and functional conservation of DNA and proteins. A typical
+MSA might look something like this:</p>
 <p><code>Seq1 ATGCATTT</code></p>
 <p><code>Seq2 ATGC-TTT</code></p>
 <p><code>Seq3 AT-C-TTT</code></p>
 <p><code>Seq4 ATGC-T--</code></p>
-<p>Although MSAs can be inspected and interpreted by hand, this can be an extremely cumbersome process. This is especially true for MSAs that have thousands of columns and tens or hundreds of sequences.</p>
+<p>Although MSAs can be inspected and interpreted by hand, this can be
+an extremely cumbersome process. This is especially true for MSAs that
+have thousands of columns and tens or hundreds of sequences.</p>
 <p><code><a href="../reference/msavisr.html">msavisr()</a></code> was developed to alleviate this problem.</p>
-<p>Given the path to a <code>FASTA</code>-formatted file containing an MSA, the user can use <code><a href="../reference/msavisr.html">msavisr()</a></code> to designate one of the sequences within as the “reference”, and then visualize all the other sequences in terms of gaps/insertions/deletions with respect to it. In addition, arbitrary features of interest (“regions of interest”/<code>ROI</code>s)–e.g., a single residue on the 5th sequence in the alignment–can be specified to the function to highlight it separately, giving the user full control over the visualization process.</p>
+<p>Given the path to a <code>FASTA</code>-formatted file containing an
+MSA, the user can use <code><a href="../reference/msavisr.html">msavisr()</a></code> to designate one of the
+sequences within as the “reference”, and then visualize all the other
+sequences in terms of gaps/insertions/deletions with respect to it. In
+addition, arbitrary features of interest (“regions of
+interest”/<code>ROI</code>s)–e.g., a single residue on the 5th sequence
+in the alignment–can be specified to the function to highlight it
+separately, giving the user full control over the visualization
+process.</p>
 <p>Here is an example illustrating the the basic function call.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Loading sample data.</span>
-<span class="va">testmsa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"testaln_mrna.fasta"</span>, package <span class="op">=</span> <span class="st">"seqvisr"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co">#Basic visualization with the sequence "Ref0" set as the reference.</span>
-<span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#Loading sample data.</span></span>
+<span><span class="va">testmsa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"testaln_mrna.fasta"</span>, package <span class="op">=</span> <span class="st">"seqvisr"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Basic visualization with the sequence "Ref0" set as the reference.</span></span>
+<span><span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/msavisr_examples-1.png" width="614.4"></p>
-<p>The basic features highlighted by <code><a href="../reference/msavisr.html">msavisr()</a></code> are the matches, mismatches, and gaps in the MSA. By default, <code><a href="../reference/msavisr.html">msavisr()</a></code> uses colorblind-friendly colors. Set <code>cbfcols = FALSE</code> to disable this.</p>
-<p>The defining feature of <code><a href="../reference/msavisr.html">msavisr()</a></code> is that arbitrary portions of one or more sequences can be highlighted by specifying them as <code>regions of interest</code> (<code>ROI</code>s). These will show up with their own colors in addition to the matches, mismatches, and gaps.</p>
-<p>Each <code>ROI</code> must be indicated as a vector wherein the first value indicates the sequence (optional), the second the position(s) as integer (ranges), and the third an identifier string for the ROI.</p>
+<p>The basic features highlighted by <code><a href="../reference/msavisr.html">msavisr()</a></code> are the
+matches, mismatches, and gaps in the MSA. By default,
+<code><a href="../reference/msavisr.html">msavisr()</a></code> uses colorblind-friendly colors. Set
+<code>cbfcols = FALSE</code> to disable this.</p>
+<p>The defining feature of <code><a href="../reference/msavisr.html">msavisr()</a></code> is that arbitrary
+portions of one or more sequences can be highlighted by specifying them
+as <code>regions of interest</code> (<code>ROI</code>s). These will show
+up with their own colors in addition to the matches, mismatches, and
+gaps.</p>
+<p>Each <code>ROI</code> must be indicated as a vector wherein the first
+value indicates the sequence (optional), the second the position(s) as
+integer (ranges), and the third an identifier string for the ROI.</p>
 <p>So an <code>ROI</code> looks like this:</p>
-<p><code><a href="https://rdrr.io/r/base/c.html">c("sequence_name", positions_as_integers, "sequence_identifier")</a></code></p>
-<p>As <code><a href="../reference/msavisr.html">msavisr()</a></code> can accept an arbitrary number of <code>ROI</code>s, these <code>ROI</code> vectors must always be passed to the function enclosed in a <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> like so:</p>
-<p><code><a href="https://rdrr.io/r/base/list.html">list(c(...), c(...), ...)</a></code></p>
-<p>Wherein in each <code><a href="https://rdrr.io/r/base/c.html">c(...)</a></code> is an <code>ROI</code> vector.</p>
-<p>EVEN IF ONLY ONE <code>ROI</code> is being passed to <code><a href="../reference/msavisr.html">msavisr()</a></code>, it MUST be enclosed by the <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> function.</p>
-<p>Here is an example of <code><a href="../reference/msavisr.html">msavisr()</a></code> with a single <code>ROI</code> named “Ref0 Domain1” that covers positions 100 to 110 on the sequence “Ref0”.</p>
+<p><code>c("sequence_name", positions_as_integers, "sequence_identifier")</code></p>
+<p>As <code><a href="../reference/msavisr.html">msavisr()</a></code> can accept an arbitrary number of
+<code>ROI</code>s, these <code>ROI</code> vectors must always be passed
+to the function enclosed in a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> like so:</p>
+<p><code>list(c(...), c(...), ...)</code></p>
+<p>Wherein in each <code>c(...)</code> is an <code>ROI</code>
+vector.</p>
+<p>EVEN IF ONLY ONE <code>ROI</code> is being passed to
+<code><a href="../reference/msavisr.html">msavisr()</a></code>, it MUST be enclosed by the <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>
+function.</p>
+<p>Here is an example of <code><a href="../reference/msavisr.html">msavisr()</a></code> with a single
+<code>ROI</code> named “Ref0 Domain1” that covers positions 100 to 110
+on the sequence “Ref0”.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/roi1-1.png" width="614.4"></p>
 <p>An example with additional <code>ROI</code>s.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#A ROI that indicates a single column (number 14) in the MSA as pseudouridines (a type of a modified nucleic acid).</span>
-<span class="va">roi2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="st">"Pseudouridine"</span><span class="op">)</span>
-
-<span class="co">#A "Domain2" defined on all sequences as existing between positions 20 and 30.</span>
-<span class="va">roi3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">:</span><span class="fl">30</span>, <span class="st">"Domain2"</span><span class="op">)</span>
-
-<span class="co">#A single nucleotide polymorphism (SNP) at position 55 on the sequence "Seq2".</span>
-<span class="va">roi4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Seq2"</span>, <span class="fl">55</span>, <span class="st">"SNP"</span><span class="op">)</span>
-
-<span class="co">#Putting all the ROIs in a list and passing it to msavisr().</span>
-<span class="va">roi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span>, <span class="va">roi2</span>, <span class="va">roi3</span>, <span class="va">roi4</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="va">roi_list</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#A ROI that indicates a single column (number 14) in the MSA as pseudouridines (a type of a modified nucleic acid).</span></span>
+<span><span class="va">roi2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="st">"Pseudouridine"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#A "Domain2" defined on all sequences as existing between positions 20 and 30.</span></span>
+<span><span class="va">roi3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">:</span><span class="fl">30</span>, <span class="st">"Domain2"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#A single nucleotide polymorphism (SNP) at position 55 on the sequence "Seq2".</span></span>
+<span><span class="va">roi4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Seq2"</span>, <span class="fl">55</span>, <span class="st">"SNP"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Putting all the ROIs in a list and passing it to msavisr().</span></span>
+<span><span class="va">roi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">roi1</span>, <span class="va">roi2</span>, <span class="va">roi3</span>, <span class="va">roi4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="va">roi_list</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/roi_list-1.png" width="614.4"></p>
-<p>The dimensions of the matches (i.e., conserved positions), non-matches (i.e., mismatches and gaps), and <code>ROI</code>s can be adjusted freely. For example:</p>
+<p>The dimensions of the matches (i.e., conserved positions),
+non-matches (i.e., mismatches and gaps), and <code>ROI</code>s can be
+adjusted freely. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span>, hroi <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span>, hroi <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/dim_ctrl-1.png" width="614.4"></p>
-<p>The user can also set the colors for the matches, mismatches, and gaps manually through the <code>basecolors</code> argument. Likewise, custom colors for the <code>ROI</code>s can be set through the <code>roicolors</code> argument. In both cases colors should be supplied as alphanumeric vectors, and there must be as many colors as there are features. (But <code><a href="../reference/msavisr.html">msavisr()</a></code> will attempt to provide its own color replacements if any are missing.)</p>
-<p>Supplying custom colors is especially useful in cases where <code><a href="../reference/msavisr.html">msavisr()</a></code> assigns colors that are too close to one another in colorspace. Also, since <code><a href="../reference/msavisr.html">msavisr()</a></code> chooses colors randomly, custom colors may be preferrable in situations where the colors should be maintained over multiple plots. (Note: <code><a href="../reference/msavisr.html">msavisr()</a></code> will ALWAYS attempt to assign unique colors to every feature including the basic features.)</p>
+<p>The user can also set the colors for the matches, mismatches, and
+gaps manually through the <code>basecolors</code> argument. Likewise,
+custom colors for the <code>ROI</code>s can be set through the
+<code>roicolors</code> argument. In both cases colors should be supplied
+as alphanumeric vectors, and there must be as many colors as there are
+features. (But <code><a href="../reference/msavisr.html">msavisr()</a></code> will attempt to provide its own
+color replacements if any are missing.)</p>
+<p>Supplying custom colors is especially useful in cases where
+<code><a href="../reference/msavisr.html">msavisr()</a></code> assigns colors that are too close to one another
+in colorspace. Also, since <code><a href="../reference/msavisr.html">msavisr()</a></code> chooses colors
+randomly, custom colors may be preferrable in situations where the
+colors should be maintained over multiple plots. (Note:
+<code><a href="../reference/msavisr.html">msavisr()</a></code> will ALWAYS attempt to assign unique colors to
+every feature including the basic features.)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span>, hroi <span class="op">=</span> <span class="fl">0.8</span>, roicolors <span class="op">=</span> <span class="op">(</span><span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">roi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ref0"</span>, <span class="fl">100</span><span class="op">:</span><span class="fl">110</span>, <span class="st">"Ref0 Domain1"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/msavisr.html">msavisr</a></span><span class="op">(</span>mymsa <span class="op">=</span> <span class="va">testmsa</span>, myref <span class="op">=</span> <span class="st">"Ref0"</span>, myroi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">roi1</span><span class="op">)</span>, hroi <span class="op">=</span> <span class="fl">0.8</span>, roicolors <span class="op">=</span> <span class="op">(</span><span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/color_demo-1.png" width="614.4"></p>
-<p>Finally, the function is sequence alphabet agnostic. So it will work with both amino acid and nucleotide sequences. However, its capability to handle amino acid mismatches is only very basic at the moment. For instance, it cannot recognize conservative substitutions, and will color all mismatches with the same color.</p>
-<p>Please see <code><a href="../reference/msavisr.html">?msavisr</a></code> for more information on this function.</p>
+<p>Finally, the function is sequence alphabet agnostic. So it will work
+with both amino acid and nucleotide sequences. However, its capability
+to handle amino acid mismatches is only very basic at the moment. For
+instance, it cannot recognize conservative substitutions, and will color
+all mismatches with the same color.</p>
+<p>Please see <code><a href="../reference/msavisr.html">?msavisr</a></code> for more information on this
+function.</p>
 </div>
-<div id="protein-domain-visualization-with-pdomvisr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#protein-domain-visualization-with-pdomvisr" class="anchor"></a>Protein domain visualization with <code>pdomvisr()</code>
+<div class="section level2">
+<h2 id="protein-domain-visualization-with-pdomvisr">Protein domain visualization with <code>pdomvisr()</code><a class="anchor" aria-label="anchor" href="#protein-domain-visualization-with-pdomvisr"></a>
 </h2>
-<p>Sequences (especially protein sequences) are often subject to annotation whereby domains and other features of interest are identifed in them. It is often very useful to visualize sequence annotations, and <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> represents a native tool in <code>R</code> to achieve this.</p>
-<p>Most tools provide the annotation data in a tabular format (alongside other formats). Irrespective of what the output table looks like, it can be coerced into this form:</p>
+<p>Sequences (especially protein sequences) are often subject to
+annotation whereby domains and other features of interest are identifed
+in them. It is often very useful to visualize sequence annotations, and
+<code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> represents a native tool in <code>R</code> to
+achieve this.</p>
+<p>Most tools provide the annotation data in a tabular format (alongside
+other formats). Irrespective of what the output table looks like, it can
+be coerced into this form:</p>
 <p><code>sequence_name sequence_length sequence_offset feature_height feature_color feature_name feature_start feature_end</code></p>
 <p><code>seq1             300               0            0.2           red         dom1           200         250</code></p>
 <p><code>seq1             300               0            0.2          blue         dom2           270         280</code></p>
 <p><code>seq2             600               0            0.4        purple         dom1           150         170</code></p>
 <p><code>seq2             600               0            0.4        yellow         dom2           400         550</code></p>
-<p>The columns here are self-explanatory. All columns here <strong>except</strong> <code>sequence_offset</code>, <code>feature_height</code>, and <code>feature_color</code> should be generated by most annotation tools automatically.</p>
-<p><strong>Needless to say, each row corresponds to one particular feature in the sequence</strong>. Therefore, sequences with multiple features should have multiple rows in the table.</p>
-<p>The <code>sequence_offset</code> column is something that needs to be manually added: it is specific to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>, and allows for appropriate placement of partial sequences (especially with reference to other sequences). This is useful, for instance, when only an internal fragment of a protein sequence is being plotted. <strong>For most use cases, the <code>sequence_offset</code> column values can be set to 0</strong>.</p>
-<p>Likewise the <code>feature_height</code> and <code>feature_color</code> columns are specific to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. As the names suggest these set the height and color of the features respectively. The advantage of this approach is that the user has full control over which features are prominently features, and which ones recede into the background. This also ensures that overlapping features can be represented faithfully. For instance, presume there is a residue of interest that must be highlighted within a domain. In this case, the residue can be passed as its own row in this input table, with a height and color different to that of the domain, ensuring that both features show up in the visualization.</p>
-<p>This tabular format is the standard (and only accepted) input format for <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> can be provided a name of (or path to) a file that contains the data formatted in this manner. Alternatively, if the data has already been loaded into the <code>R</code> environment, the function can simply be passed this <code>data.frame</code>/<code>data.table</code>/<code>tibble</code>’s name. In any case, given this input data, <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> will then draw domain structure.</p>
-<p>Note: technically speaking, all <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> actually cares about is that the input has been processed by <code><a href="../reference/tsvtogginp_multi.html">seqvisr::tsvtogginp_multi()</a></code>. It can automatically check if this is the case. So the user can call <code><a href="../reference/tsvtogginp_multi.html">seqvisr::tsvtogginp_multi()</a></code> separately, post-process it, and then pass that to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. This is to provide the end user full control over the plot inputs. For instance, this way, the user can assign different (but corresponding) values for the feature legend labels and the in-sequence feature labels.</p>
+<p>The columns here are self-explanatory. All columns here
+<strong>except</strong> <code>sequence_offset</code>,
+<code>feature_height</code>, and <code>feature_color</code> should be
+generated by most annotation tools automatically.</p>
+<p><strong>Needless to say, each row corresponds to one particular
+feature in the sequence</strong>. Therefore, sequences with multiple
+features should have multiple rows in the table.</p>
+<p>The <code>sequence_offset</code> column is something that needs to be
+manually added: it is specific to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>, and allows
+for appropriate placement of partial sequences (especially with
+reference to other sequences). This is useful, for instance, when only
+an internal fragment of a protein sequence is being plotted. <strong>For
+most use cases, the <code>sequence_offset</code> column values can be
+set to 0</strong>.</p>
+<p>Likewise the <code>feature_height</code> and
+<code>feature_color</code> columns are specific to
+<code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. As the names suggest these set the height and
+color of the features respectively. The advantage of this approach is
+that the user has full control over which features are prominently
+features, and which ones recede into the background. This also ensures
+that overlapping features can be represented faithfully. For instance,
+presume there is a residue of interest that must be highlighted within a
+domain. In this case, the residue can be passed as its own row in this
+input table, with a height and color different to that of the domain,
+ensuring that both features show up in the visualization.</p>
+<p>This tabular format is the standard (and only accepted) input format
+for <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> can be provided a
+name of (or path to) a file that contains the data formatted in this
+manner. Alternatively, if the data has already been loaded into the
+<code>R</code> environment, the function can simply be passed this
+<code>data.frame</code>/<code>data.table</code>/<code>tibble</code>’s
+name. In any case, given this input data, <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> will
+then draw domain structure.</p>
+<p>Note: technically speaking, all <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> actually
+cares about is that the input has been processed by
+<code><a href="../reference/tsvtogginp_multi.html">seqvisr::tsvtogginp_multi()</a></code>. It can automatically check if
+this is the case. So the user can call
+<code><a href="../reference/tsvtogginp_multi.html">seqvisr::tsvtogginp_multi()</a></code> separately, post-process it,
+and then pass that to <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. This is to provide the
+end user full control over the plot inputs. For instance, this way, the
+user can assign different (but corresponding) values for the feature
+legend labels and the in-sequence feature labels.</p>
 <p>Here is <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> in action.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Loading some sample data.</span>
-<span class="va">inpath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"pdomvisr_testdata.csv"</span>, package <span class="op">=</span> <span class="st">"seqvisr"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">annotdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="va">inpath</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span>
-<span class="co">#Plotting a subset of the data in there.</span>
-<span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>
-
-<span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#Loading some sample data.</span></span>
+<span><span class="va">inpath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"pdomvisr_testdata.csv"</span>, package <span class="op">=</span> <span class="st">"seqvisr"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">annotdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">inpath</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
+<span><span class="co">#Plotting a subset of the data in there.</span></span>
+<span><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/pdomvisr-1.png" width="614.4"></p>
-<p>For those interested, this is what <code>inpdat</code> looks like:</p>
+<p>For those interested, this is what <code>inpdat</code> looks
+like:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">inpath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"pdomvisr_testdata.csv"</span>, package <span class="op">=</span> <span class="st">"seqvisr"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">annotdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="va">inpath</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span>
-<span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>
-<span class="va">inpdat</span></code></pre></div>
-<pre><code>##   prot_acc seq_len seq_offset feature_height feature_color signature_desc
-## 1     Seq1     579          0            0.4          blue           dom1
-## 2     Seq1     579          0            0.4       #01d276           dom2
-## 3     Seq2     855          0            0.4          blue           dom1
-## 4     Seq2     855          0            0.4       #01d276           dom2
-##   start_loc stop_loc
-## 1       308      407
-## 2       133      184
-## 3       275      373
-## 4       118      216</code></pre>
+<code class="sourceCode R"><span><span class="va">inpath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"pdomvisr_testdata.csv"</span>, package <span class="op">=</span> <span class="st">"seqvisr"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">annotdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">inpath</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
+<span><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span></span>
+<span><span class="va">inpdat</span></span></code></pre></div>
+<pre><code><span><span class="co">##   prot_acc seq_len seq_offset feature_height feature_color signature_desc</span></span>
+<span><span class="co">## 1     Seq1     579          0            0.4          blue           dom1</span></span>
+<span><span class="co">## 2     Seq1     579          0            0.4       #01d276           dom2</span></span>
+<span><span class="co">## 3     Seq2     855          0            0.4          blue           dom1</span></span>
+<span><span class="co">## 4     Seq2     855          0            0.4       #01d276           dom2</span></span>
+<span><span class="co">##   start_loc stop_loc</span></span>
+<span><span class="co">## 1       308      407</span></span>
+<span><span class="co">## 2       133      184</span></span>
+<span><span class="co">## 3       275      373</span></span>
+<span><span class="co">## 4       118      216</span></span></code></pre>
 <p>It is similar to the input table described above.</p>
-<p><strong>Note:</strong> although the data were read into <code>R</code> using <code>read.table</code> in the example above, this is not strictly necessary for <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. The user can also simply supply it the path to the file, and it will work all the same as long as the data in the file formatted as described above.</p>
-<p>One issue that is immediately apparent is that the labels on the domains are not easy to read. By default, <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> lets <code>ggplot2</code> calculate the label sizes automatically (<code>label_size = "auto"</code>). To amend this, the labels can either be switched off (by setting <code>label_size = 0</code>) or reduced in size. Alternatively, if <code>label_size</code> is set to <code>"repel"</code>, labels will be drawn displaced from their corresponding features, with the two being connected by straight lines.</p>
+<p><strong>Note:</strong> although the data were read into
+<code>R</code> using <code>read.table</code> in the example above, this
+is not strictly necessary for <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>. The user can also
+simply supply it the path to the file, and it will work all the same as
+long as the data in the file formatted as described above.</p>
+<p>One issue that is immediately apparent is that the labels on the
+domains are not easy to read. By default, <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> lets
+<code>ggplot2</code> calculate the label sizes automatically
+(<code>label_size = "auto"</code>). To amend this, the labels can either
+be switched off (by setting <code>label_size = 0</code>) or reduced in
+size. Alternatively, if <code>label_size</code> is set to
+<code>"repel"</code>, labels will be drawn displaced from their
+corresponding features, with the two being connected by straight
+lines.</p>
 <p>Plot with labeling switched off:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/label_off-1.png" width="614.4"></p>
 <p>Plot with labeling switched on with custom size:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/label_small-1.png" width="614.4"></p>
 <p>Plot with labeling set to arrows + repelling:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="st">"repel"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span>, label_size <span class="op">=</span> <span class="st">"repel"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/label_repel-1.png" width="614.4"></p>
-<p>One potential issue with the tabular output of most annotation tools is that <em>sequences that have no annotations</em> assigned to them are <em>not</em> listed in the table. There can be scenarios where a sequence with no domains must be visualized alongside its counterparts that do.</p>
+<p>One potential issue with the tabular output of most annotation tools
+is that <em>sequences that have no annotations</em> assigned to them are
+<em>not</em> listed in the table. There can be scenarios where a
+sequence with no domains must be visualized alongside its counterparts
+that do.</p>
 <p><code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> can handle this quite easily.</p>
-<p>In such instances, the user simply needs to add (at least) one row for this featureless sequence. The sequence name, sequence length, and offset (if needed) must be specified correctly. The column corresponding to the feature name should carry a <code>NA</code> string, and the start and end positions should be set to 0. This is illustrated below. The feature height should be set to 0 and the feature color to <code>NA</code>.</p>
+<p>In such instances, the user simply needs to add (at least) one row
+for this featureless sequence. The sequence name, sequence length, and
+offset (if needed) must be specified correctly. The column corresponding
+to the feature name should carry a <code>NA</code> string, and the start
+and end positions should be set to 0. This is illustrated below. The
+feature height should be set to 0 and the feature color to
+<code>NA</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">6</span>, <span class="op">]</span>
-<span class="va">inpdat</span></code></pre></div>
-<pre><code>##   prot_acc seq_len seq_offset feature_height feature_color signature_desc
-## 6     Seq4    1197          0              0          &lt;NA&gt;           &lt;NA&gt;
-##   start_loc stop_loc
-## 6         0        0</code></pre>
+<code class="sourceCode R"><span><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">6</span>, <span class="op">]</span></span>
+<span><span class="va">inpdat</span></span></code></pre></div>
+<pre><code><span><span class="co">##   prot_acc seq_len seq_offset feature_height feature_color signature_desc</span></span>
+<span><span class="co">## 6     Seq4    1197          0              0          &lt;NA&gt;           &lt;NA&gt;</span></span>
+<span><span class="co">##   start_loc stop_loc</span></span>
+<span><span class="co">## 6         0        0</span></span></code></pre>
 <p>And plotting this would result in this:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/featureless_seq_plotted-1.png" width="614.4"></p>
-<p>There is no legend because there are no domains/features to be displayed.</p>
-<p>If this were to be displayed alongside other sequences, it might look like this:</p>
+<p>There is no legend because there are no domains/features to be
+displayed.</p>
+<p>If this were to be displayed alongside other sequences, it might look
+like this:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>
-<span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">inpdat</span> <span class="op">&lt;-</span> <span class="va">annotdat</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span></span>
+<span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">inpdat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/featureless_w_others-1.png" width="614.4"></p>
-<p>An important feature of <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> is that it accepts an “offset” parameter that indicates how far away from the actual first position of the sequence the indicated sequence itself is. For instance, a sequence of length 300 might actually be a fragment of a longer sequence that is 500 residues long, with the 300 residue-long sequence being the latter half of it. In such an instance, the rows for this sequence should have an offset value of 200.</p>
-<p>This is demonstrated with a small example below where the same sequence is plotted with and without an offset:</p>
+<p>An important feature of <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> is that it accepts an
+“offset” parameter that indicates how far away from the actual first
+position of the sequence the indicated sequence itself is. For instance,
+a sequence of length 300 might actually be a fragment of a longer
+sequence that is 500 residues long, with the 300 residue-long sequence
+being the latter half of it. In such an instance, the rows for this
+sequence should have an offset value of 200.</p>
+<p>This is demonstrated with a small example below where the same
+sequence is plotted with and without an offset:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">w_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"w_offset"</span>, <span class="fl">300</span>, <span class="fl">200</span>, <span class="fl">0.6</span>, <span class="st">"green"</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span>
-<span class="va">no_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no_offset"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.6</span>, <span class="st">"green"</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">w_offset</span>, <span class="va">no_offset</span><span class="op">)</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span>inpdat <span class="op">=</span> <span class="va">df</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">w_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"w_offset"</span>, <span class="fl">300</span>, <span class="fl">200</span>, <span class="fl">0.6</span>, <span class="st">"green"</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span></span>
+<span><span class="va">no_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"no_offset"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.6</span>, <span class="st">"green"</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">w_offset</span>, <span class="va">no_offset</span><span class="op">)</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span>inpdat <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/offset_example-1.png" width="614.4"></p>
-<p>As can be seen, the only difference is that the sequence with the offset supplied starts further down along the X-axis. By default, the “sequence” corresponding to the offset length is shown. This can be disabled by setting <code>show_offsets = FALSE</code>.</p>
+<p>As can be seen, the only difference is that the sequence with the
+offset supplied starts further down along the X-axis. By default, the
+“sequence” corresponding to the offset length is shown. This can be
+disabled by setting <code>show_offsets = FALSE</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span>, show_offsets <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span>, show_offsets <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/offset_disable-1.png" width="614.4"></p>
-<p>The colors and heights for the various features must be assigned by the user. This gives the user near complete control over how features will be highlighted relative to one another.</p>
+<p>The colors and heights for the various features must be assigned by
+the user. This gives the user near complete control over how features
+will be highlighted relative to one another.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">seq1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.4</span>, <span class="st">"green"</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span>
-<span class="va">seq1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.6</span>, <span class="st">"lightblue"</span>, <span class="st">"dom2"</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">seq1a</span>, <span class="va">seq1b</span><span class="op">)</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">seq1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.4</span>, <span class="st">"green"</span>, <span class="st">"dom1"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span></span>
+<span><span class="va">seq1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.6</span>, <span class="st">"lightblue"</span>, <span class="st">"dom2"</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">seq1a</span>, <span class="va">seq1b</span><span class="op">)</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/feat_heights_colors-1.png" width="614.4"></p>
-<p>This also ensures that overlapping features can be plotted with ease (see example below).</p>
+<p>This also ensures that overlapping features can be plotted with ease
+(see example below).</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">seq1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.1</span>, <span class="st">"yellow"</span>, <span class="st">"dom2"</span>, <span class="fl">220</span>, <span class="fl">220</span><span class="op">)</span>
-<span class="va">seq1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.6</span>, <span class="st">"darkgreen"</span>, <span class="st">"dom3"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">seq1a</span>, <span class="va">seq1b</span><span class="op">)</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span>, label_size <span class="op">=</span> <span class="st">"repel"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">seq1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.1</span>, <span class="st">"yellow"</span>, <span class="st">"dom2"</span>, <span class="fl">220</span>, <span class="fl">220</span><span class="op">)</span></span>
+<span><span class="va">seq1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seq1"</span>, <span class="fl">300</span>, <span class="fl">0</span>, <span class="fl">0.6</span>, <span class="st">"darkgreen"</span>, <span class="st">"dom3"</span>, <span class="fl">210</span>, <span class="fl">240</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">seq1a</span>, <span class="va">seq1b</span><span class="op">)</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">df</span>, label_size <span class="op">=</span> <span class="st">"repel"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/overlap_annots-1.png" width="614.4"></p>
-<p>The heights, transparencies, and fill colors for the non-feature portions of the sequences can be adjusted by the user. In addition, the number of breaks on the X-axis, and legend visibility can also be set by the user. Refer to the help page (<code><a href="../reference/pdomvisr.html">?pdomvisr</a></code>) for more details on these. Likewise, labels for the axes and legend can be controlled by the user, along with whether or not the Y-axis is visible or not.</p>
-<p>This, therefore permits the visualization of complex annotation data like the one below.</p>
+<p>The heights, transparencies, and fill colors for the non-feature
+portions of the sequences can be adjusted by the user. In addition, the
+number of breaks on the X-axis, and legend visibility can also be set by
+the user. Refer to the help page (<code><a href="../reference/pdomvisr.html">?pdomvisr</a></code>) for more
+details on these. Likewise, labels for the axes and legend can be
+controlled by the user, along with whether or not the Y-axis is visible
+or not.</p>
+<p>This, therefore permits the visualization of complex annotation data
+like the one below.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">annotdat</span>, label_size <span class="op">=</span> <span class="st">"repel"</span>, hide_y_axis <span class="op">=</span> <span class="cn">TRUE</span>, ylabel <span class="op">=</span> <span class="st">""</span>, xlabel <span class="op">=</span> <span class="st">""</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdomvisr.html">pdomvisr</a></span><span class="op">(</span><span class="va">annotdat</span>, label_size <span class="op">=</span> <span class="st">"repel"</span>, hide_y_axis <span class="op">=</span> <span class="cn">TRUE</span>, ylabel <span class="op">=</span> <span class="st">""</span>, xlabel <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <p><img src="seqvisr_files/figure-html/annotdat_all-1.png" width="614.4"></p>
+</div>
+<div class="section level2">
+<h2 id="easy-protein-annotations-using-cdsearchr">Easy protein annotations using <code>cdsearchr()</code><a class="anchor" aria-label="anchor" href="#easy-protein-annotations-using-cdsearchr"></a>
+</h2>
+<p>As <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code> can easily visualize sequence annotations,
+<code>seqvisr</code> now includes a native function
+(<code><a href="../reference/cdsearchr.html">cdsearchr()</a></code>) to submit sequences to NCBI’s CD-SEARCH API
+(<a href="https://www.ncbi.nlm.nih.gov/Structure/cdd/wrpsb.cgi" class="external-link uri">https://www.ncbi.nlm.nih.gov/Structure/cdd/wrpsb.cgi</a>),
+and retrieve the results as a <code>data.frame</code>. (Of course, it
+need not be used in conjunction with <code><a href="../reference/pdomvisr.html">pdomvisr()</a></code>, and this
+aspect is still a work in progress as of <code>v0.2.6</code>.)</p>
+<p><code><a href="../reference/cdsearchr.html">cdsearchr()</a></code> is easy to use, and requires only a single,
+mandatory input from the user: a <code>FASTA</code> file containing the
+protein sequences to be annotated. All standard CD-SEARCH parameters
+(see <a href="https://www.ncbi.nlm.nih.gov/Structure/cdd/cdd_help.shtml#BatchRPSBWebAPI_parameters" class="external-link uri">https://www.ncbi.nlm.nih.gov/Structure/cdd/cdd_help.shtml#BatchRPSBWebAPI_parameters</a>)
+are also exposed by <code><a href="../reference/cdsearchr.html">cdsearchr()</a></code> should the user wish to
+adjust the search parameters (but this is not necessary).</p>
+<p>Invocation is easy, and as follows:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Loading example data.</span></span>
+<span><span class="va">inpath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"cdsearchr_testdata.fasta"</span>, package <span class="op">=</span> <span class="st">"seqvisr"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#Obtaining annotations.</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdsearchr.html">cdsearchr</a></span><span class="op">(</span>queries <span class="op">=</span> <span class="va">inpath</span>, check_wait <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## cdsearchr</span></span></code></pre>
+<pre><code><span><span class="co">## Submitting  6  queries to the CD-SEARCH webserver.</span></span>
+<span><span class="co">## Queries submitted successfully.</span></span>
+<span><span class="co">## If cdsearchr fails, the status of the search can be checked manually at the following URL:</span></span>
+<span><span class="co">## https://www.ncbi.nlm.nih.gov/Structure/bwrpsb/bwrpsb.cgi?cdsid=QM3-qcdsearch-1259221D527717B3-F5C3A66C17FA9C0 </span></span>
+<span><span class="co">## Search in progress.</span></span>
+<span><span class="co">## Querying search status in  2  seconds.</span></span>
+<span><span class="co">## Will query a total of  10  times.</span></span>
+<span><span class="co">## Search in progress.</span></span>
+<span><span class="co">## Search in progress.</span></span>
+<span><span class="co">## Remote search on CD-SEARCH completed!! Will retrieve the results now.</span></span>
+<span><span class="co">## Sequence annotations successfully retrieved.</span></span></code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Sample output of annotations</span></span>
+<span><span class="va">df</span></span></code></pre></div>
+<pre><code><span><span class="co">##                             Query    Hit type PSSM-ID From  To     E-Value</span></span>
+<span><span class="co">## 1:  Q#1 - &gt;sp|Q19825|SYRC_CAEEL[] superfamily  215160  133 713 0.00000e+00</span></span>
+<span><span class="co">## 2:  Q#2 - &gt;sp|Q19842|PCCA_CAEEL[]    specific  227111   49 724 0.00000e+00</span></span>
+<span><span class="co">## 3: Q#3 - &gt;sp|Q19892|SELT2_CAEEL[] superfamily  412883   72 209 3.13015e-17</span></span>
+<span><span class="co">## 4:  Q#4 - &gt;sp|Q19967|EMO1_CAEEL[] superfamily  412402   11  68 3.23846e-25</span></span>
+<span><span class="co">## 5: Q#5 - &gt;sp|Q1ZXS5|VPS39_CAEEL[]    specific  395630   21 303 1.76489e-43</span></span>
+<span><span class="co">## 6: Q#5 - &gt;sp|Q1ZXS5|VPS39_CAEEL[]    specific  371008  471 576 6.96366e-37</span></span>
+<span><span class="co">## 7: Q#5 - &gt;sp|Q1ZXS5|VPS39_CAEEL[]    specific  402126  811 919 2.29879e-35</span></span>
+<span><span class="co">## 8: Q#6 - &gt;sp|Q20053|AT5F1_CAEEL[]    specific  368426  134 297 3.12079e-44</span></span>
+<span><span class="co">##    Bitscore Accession           Short name Incomplete Superfamily</span></span>
+<span><span class="co">## 1: 656.3290   cl33450 PLN02286 superfamily          -           -</span></span>
+<span><span class="co">## 2: 830.0120   COG4770                 PccA          -     cl39082</span></span>
+<span><span class="co">## 3:  72.7003   cl01407      Rdx superfamily          -           -</span></span>
+<span><span class="co">## 4:  88.2314   cl00481     SecE superfamily          N           -</span></span>
+<span><span class="co">## 5: 158.5490 pfam00780                  CNH          -     cl02434</span></span>
+<span><span class="co">## 6: 133.9060 pfam10366              Vps39_1          -     cl11033</span></span>
+<span><span class="co">## 7: 129.6820 pfam10367              Vps39_2          -     cl11034</span></span>
+<span><span class="co">## 8: 148.1900 pfam05405        Mt_ATP-synt_B          -     cl21478</span></span></code></pre>
+<p>Users should note that <code>cdsearchr</code> respects the 4000
+sequence submission limit that the CD-SEARCH server imposes. So for
+query sets with &gt; 4000 sequences, please chunk the data accordingly
+beforehand (e.g., into subsets of 2000 sequences each). Further,
+although default values have been supplied for <code>check_max</code>
+and <code>check_wait</code> – how many times the CD-SEARCH server has to
+be queried, and how often (in seconds), respectively – it is best to
+adjust these based on the size of the input data. It is recommended to
+set larger values for both for bigger datasets and vice versa.</p>
 </div>
   </div>
 
@@ -301,11 +519,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Venket Raghavan.</p>
+  <p></p>
+<p>Developed by Venket Raghavan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -313,6 +533,8 @@
 
   
 
+
+  
 
   </body>
 </html>
