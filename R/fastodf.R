@@ -31,6 +31,8 @@
 #'
 #' @importFrom seqinr read.fasta
 #'
+#' @export
+#'
 fastodf <- function(path = NULL, seqtype = c("DNA", "AA"), incl_filepath = TRUE){
 
   #require(seqinr)
@@ -90,6 +92,8 @@ fastodf <- function(path = NULL, seqtype = c("DNA", "AA"), incl_filepath = TRUE)
 #' }
 #'
 #' @importFrom seqinr read.fasta
+#'
+#' @export
 #'
 fasdirdf <- function(path = NULL, pat = NULL, seqtype = c("DNA", "AA"), incl_filepath = TRUE){
 
