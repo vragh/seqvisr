@@ -28,6 +28,8 @@
 #'
 #' @seealso \link[base]{list.files} for documentation regarding all other arguments.
 #'
+#' @export
+#'
 list_files <- function(path = ".", pattern = NULL, all.files = FALSE, full.names = TRUE,
                        recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE,
                        incl_dirs = FALSE){
