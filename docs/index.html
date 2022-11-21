@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">seqvisr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.7</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
 <h1 id="seqvisr-1">seqvisr<a class="anchor" aria-label="anchor" href="#seqvisr-1"></a>
 </h1>
 <p>Biological sequence visualization and auxiliary functions in <code>R</code>.</p>
-<p>Consists of two visualization main functions: <code><a href="reference/msavisr.html">msavisr()</a></code> and <code><a href="reference/pdomvisr.html">pdomvisr()</a></code>.</p>
+<p>Consists of two main visualization functions: <code><a href="reference/msavisr.html">msavisr()</a></code> and <code><a href="reference/pdomvisr.html">pdomvisr()</a></code>.</p>
 <p><code><a href="reference/msavisr.html">msavisr()</a></code> takes <code>FASTA</code>-formatted multiple sequence alignments (MSAs) as inputs and produces visualizations like the example below:</p>
 <!-- <img src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png" alt="msavisr" width="60%" height="60%"/> -->
 <figure><img src="./docs/articles/seqvisr_files/figure-html/msavisr_examples-1.png" style="width:60.0%;height:60.0%" alt="msavisr"><figcaption aria-hidden="true">
@@ -85,11 +85,13 @@ msavisr
 <!-- <img src="./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png" alt="pdomvisr" width="60%" height="60%"/> -->
 <figure><img src="./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png" style="width:60.0%;height:60.0%" alt="pdomvisr"><figcaption aria-hidden="true">
 pdomvisr
-</figcaption></figure><p><em>NEW</em> as of <code>v0.2.6</code>: <code><a href="reference/cdsearchr.html">cdsearchr()</a></code> now enables users to submit protein sequence sets to the NCBI CD-SEARCH server and retrieve annotations as a <code>data.frame</code> automatically. Example output below:</p>
+</figcaption></figure><p><code><a href="reference/cdsearchr.html">cdsearchr()</a></code> now enables users to submit protein sequence sets to the NCBI CD-SEARCH server and retrieve annotations as a <code>data.frame</code> automatically. Example output below:</p>
 <!-- <img src="./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png" alt="cdsearchr" width="60%" height="60%"/> -->
 <figure><img src="./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png" style="width:60.0%;height:60.0%" alt="cdsearchr"><figcaption aria-hidden="true">
 cdsearchr
-</figcaption></figure><div class="section level2">
+</figcaption></figure><p><em>NEW</em> as of <code>v0.2.7</code>: <code><a href="reference/fastodf.html">fastodf()</a></code> and <code><a href="reference/fasdirdf.html">fasdirdf()</a></code> are two small utility functions that can be used to read in one or more FASTA files into <code>R</code> as a <code>data.frame</code>. <code><a href="reference/fastodf.html">fastodf()</a></code> can be used to read in a single FASTA file, while <code><a href="reference/fasdirdf.html">fasdirdf()</a></code> can be used to read in an entire directory’s worth of FASTA files into a single <code>data.frame</code>. See <code><a href="reference/fastodf.html">?fastodf</a></code> and <code><a href="reference/fasdirdf.html">?fasdirdf</a></code> for examples.</p>
+<p><code><a href="reference/list_files.html">list_files()</a></code> is a wrapper around <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">base::list.files()</a></code> that has been introduced to account for <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code> including directory names by default when <code>recursive = FALSE</code>. See <code><a href="reference/list_files.html">?list_files</a></code> for clarifications.</p>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Ensure that <a href="https://github.com/r-lib/devtools" class="external-link"><code>devtools</code></a> is installed. Then execute <code>devtools::install_github("vragh/seqvisr", build_manual = TRUE, build_vignettes = TRUE)</code> from within <code>R</code> to install the package. If the manual and package vignette are not necessary, <code>build_manual = TRUE, build_vignettes = TRUE</code> can be omitted.</p>
@@ -97,7 +99,7 @@ cdsearchr
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>See <code><a href="reference/seqvisr-package.html">?seqvisr</a></code>, <code><a href="reference/msavisr.html">?msavisr</a></code>, <code><a href="reference/pdomvisr.html">?pdomvisr</a></code>, and <code><a href="reference/cdsearchr.html">?cdsearchr</a></code> (from within <code>R</code>) to access documentation and examples. Run <code>browseVignettes("seqvisr")</code> to access the vignette.</p>
+<p>See <code><a href="reference/seqvisr-package.html">?seqvisr</a></code>, <code><a href="reference/msavisr.html">?msavisr</a></code>, <code><a href="reference/pdomvisr.html">?pdomvisr</a></code>, and <code><a href="reference/cdsearchr.html">?cdsearchr</a></code> (from within <code>R</code>) to access documentation and examples for the main functions. Run <code>browseVignettes("seqvisr")</code> to access the vignette.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>

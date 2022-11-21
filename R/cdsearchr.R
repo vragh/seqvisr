@@ -1,4 +1,4 @@
-#' Submit a queries to NCBI's CD-SEARCH via R.
+#' Submit a set of queries to NCBI's CD-SEARCH via R.
 #'
 #' @description
 #' Core internal \code{\link{cdsearchr}} function that prepares and submit queries to the

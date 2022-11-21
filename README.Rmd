@@ -22,18 +22,21 @@ Consists of two main visualization functions: `msavisr()` and `pdomvisr()`.
 <!-- <img src="./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png" alt="pdomvisr" width="60%" height="60%"/> -->
 ![pdomvisr](./docs/articles/seqvisr_files/figure-html/annotdat_all-1.png){width=60% height=60%}
 
-*NEW* as of `v0.2.6`:
 `cdsearchr()` now enables users to submit protein sequence sets to the NCBI CD-SEARCH server and retrieve annotations as a `data.frame` automatically. Example output below:
 
 <!-- <img src="./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png" alt="cdsearchr" width="60%" height="60%"/> -->
 ![cdsearchr](./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png){width=60% height=60%}
 
+*NEW* as of `v0.2.7`:
+`fastodf()` and `fasdirdf()` are two small utility functions that can be used to read in one or more FASTA files into `R` as a `data.frame`. `fastodf()` can be used to read in a single FASTA file, while `fasdirdf()` can be used to read in an entire directory's worth of FASTA files into a single `data.frame`. See `?fastodf` and `?fasdirdf` for examples.
+
+`list_files()` is a wrapper around `base::list.files()` that has been introduced to account for `list.files()` including directory names by default when `recursive = FALSE`. See `?list_files` for clarifications.
 
 ## Installation
 Ensure that [`devtools`](https://github.com/r-lib/devtools) is installed. Then execute `devtools::install_github("vragh/seqvisr", build_manual = TRUE, build_vignettes = TRUE)` from within `R` to install the package. If the manual and package vignette are not necessary, `build_manual = TRUE, build_vignettes = TRUE` can be omitted.
 
 ## Usage
-See `?seqvisr`, `?msavisr`, `?pdomvisr`, and `?cdsearchr` (from within `R`) to access documentation and examples. Run `browseVignettes("seqvisr")` to access the vignette.
+See `?seqvisr`, `?msavisr`, `?pdomvisr`, and `?cdsearchr` (from within `R`) to access documentation and examples for the main functions. Run `browseVignettes("seqvisr")` to access the vignette.
 
 ## Citation
 Please cite `seqvisr` using [https://doi.org/10.5281/zenodo.6583981](https://doi.org/10.5281/zenodo.6583981).
