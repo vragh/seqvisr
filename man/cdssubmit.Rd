@@ -2,7 +2,7 @@
 % Please edit documentation in R/cdsearchr.R
 \name{cdssubmit}
 \alias{cdssubmit}
-\title{Submit a queries to NCBI's CD-SEARCH via R.}
+\title{Submit a set of queries to NCBI's CD-SEARCH via R.}
 \usage{
 cdssubmit(queries = NA, cdsurl = NULL,
 db = c("cdd", "pfam", "smart", "tigrfam", "cog", "kog"),

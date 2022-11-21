@@ -36,9 +36,9 @@ style="width:60.0%;height:60.0%" alt="pdomvisr" />
 <figcaption aria-hidden="true">pdomvisr</figcaption>
 </figure>
 
-*NEW* as of `v0.2.6`: `cdsearchr()` now enables users to submit protein
-sequence sets to the NCBI CD-SEARCH server and retrieve annotations as a
-`data.frame` automatically. Example output below:
+`cdsearchr()` now enables users to submit protein sequence sets to the
+NCBI CD-SEARCH server and retrieve annotations as a `data.frame`
+automatically. Example output below:
 
 <!-- <img src="./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png" alt="cdsearchr" width="60%" height="60%"/> -->
 
@@ -48,6 +48,17 @@ src="./docs/articles/seqvisr_files/figure-html/cdsearchr_sample_output.png"
 style="width:60.0%;height:60.0%" alt="cdsearchr" />
 <figcaption aria-hidden="true">cdsearchr</figcaption>
 </figure>
+
+*NEW* as of `v0.2.7`: `fastodf()` and `fasdirdf()` are two small utility
+functions that can be used to read in one or more FASTA files into `R`
+as a `data.frame`. `fastodf()` can be used to read in a single FASTA
+file, while `fasdirdf()` can be used to read in an entire directory’s
+worth of FASTA files into a single `data.frame`. See `?fastodf` and
+`?fasdirdf` for examples.
+
+`list_files()` is a wrapper around `base::list.files()` that has been
+introduced to account for `list.files()` including directory names by
+default when `recursive = FALSE`. See `?list_files` for clarifications.
 
 ## Installation
 
@@ -61,7 +72,7 @@ vignette are not necessary,
 ## Usage
 
 See `?seqvisr`, `?msavisr`, `?pdomvisr`, and `?cdsearchr` (from within
-`R`) to access documentation and examples. Run
+`R`) to access documentation and examples for the main functions. Run
 `browseVignettes("seqvisr")` to access the vignette.
 
 ## Citation
