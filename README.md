@@ -77,7 +77,7 @@ See `?seqvisr`, `?msavisr`, `?pdomvisr`, and `?cdsearchr` (from within
 
 ## Citation
 
-Please cite `seqvisr` using <https://doi.org/10.5281/zenodo.6583981>.
+Please cite `seqvisr` using <https://zenodo.org/doi/10.5281/zenodo.6583980>.
 
 ## License
 
