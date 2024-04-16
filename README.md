@@ -4,7 +4,7 @@ seqvisr
 [![Build
 Status](https://app.travis-ci.com/vragh/seqvisr.svg?branch=main)](https://app.travis-ci.com/vragh/seqvisr)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6583981.svg)](https://doi.org/10.5281/zenodo.6583981)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6583980.svg)](https://doi.org/10.5281/zenodo.6583980)
 
 # seqvisr
 
